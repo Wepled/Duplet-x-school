@@ -5,9 +5,4 @@
     <RootNamespace>Duplet_x_school</RootNamespace>
   </PropertyGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>
