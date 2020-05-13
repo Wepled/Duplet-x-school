@@ -64,7 +64,29 @@ namespace Duplet_x_school.Data
             context.Classes.AddRange(classes);
             context.SaveChanges();
 
+            var subjects = new Subject[]
+            {
+                new Subject { Name = "Mathematics" },
+                new Subject { Name = "Chemistry" },
+                new Subject { Name = "Art" },
+                new Subject { Name = "Music" },
+                new Subject { Name = "English" },
+                new Subject { Name = "Literature" },
+                new Subject { Name = "Physics" },
+                new Subject { Name = "Biology" },
+            };
 
+            context.Subjects.AddRange(subjects);
+            context.SaveChanges();
+
+            var optsubjects = new OptSubject[]
+            {
+                new OptSubject { Name = "Programming", StudentID = students.Single( s => s.FullName == "Alexander, Carson").ID, TeacherID = teachers.Single( s => s.FullName == "Maksimov, Pavel").ID},
+                new OptSubject { Name = "Robotics", StudentID = students.Single( s => s.FullName == "Alexander, Veronica").ID, TeacherID = teachers.Single( s => s.FullName == "Abercrombie, Kim").ID},
+            };
+
+            context.OptSubjects.AddRange(optsubjects);
+            context.SaveChanges();
         }
     }
 }
