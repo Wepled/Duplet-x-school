@@ -9,8 +9,5 @@ namespace Duplet_x_school.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-
-        public int StudentID { get; set; }
-        public int TeacherID { get; set; }
     }
 }

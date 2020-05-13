@@ -7,7 +7,7 @@ namespace Duplet_x_school.Models
 {
     public class Class
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public ICollection<Student> Students { get; set; }
         public int KabinetID { get; set; }

@@ -15,6 +15,40 @@ namespace Duplet_x_school.Data
                 return;   // DB has been seeded
             }
 
+            var kabinets = new Kabinet[]
+            {
+                new Kabinet {Name = "101"},
+                new Kabinet {Name = "102"},
+                new Kabinet {Name = "103"},
+                new Kabinet {Name = "104"},
+                new Kabinet {Name = "105"},
+                new Kabinet {Name = "106"},
+            };
+
+            context.Kabinets.AddRange(kabinets);
+            context.SaveChanges();
+
+            var teachers = new Teacher[]
+            {
+                new Teacher { FirstMidName = "Kim",     LastName = "Abercrombie",
+                    HireDate = DateTime.Parse("1995-03-11")},
+                new Teacher { FirstMidName = "Pavel",     LastName = "Maksimov",
+                    HireDate = DateTime.Parse("1995-03-11")}
+            };
+
+            context.Teachers.AddRange(teachers);
+            context.SaveChanges();
+
+            var classes = new Class[]
+            {
+                new Class { Name = "1A", TeacherID = 1, KabinetID = 1},
+                new Class { Name = "2A", TeacherID = 2, KabinetID = 1},
+                new Class { Name = "3A", TeacherID = 1, KabinetID = 1}
+            };
+
+            context.Classes.AddRange(classes);
+            context.SaveChanges();
+
             var students = new Student[]
             {
                 new Student { FirstMidName = "Carson",   LastName = "Alexander",
@@ -30,40 +64,6 @@ namespace Duplet_x_school.Data
             context.Students.AddRange(students);
             context.SaveChanges();
 
-            var teachers = new Teacher[]
-            {
-                new Teacher { FirstMidName = "Kim",     LastName = "Abercrombie",
-                    HireDate = DateTime.Parse("1995-03-11")},
-                new Teacher { FirstMidName = "Pavel",     LastName = "Maksimov",
-                    HireDate = DateTime.Parse("1995-03-11")}
-            };
-
-            context.Teachers.AddRange(teachers);
-            context.SaveChanges();
-
-            var kabinets = new Kabinet[]
-            {
-                new Kabinet {Name = "101"},
-                new Kabinet {Name = "102"},
-                new Kabinet {Name = "103"},
-                new Kabinet {Name = "104"},
-                new Kabinet {Name = "105"},
-                new Kabinet {Name = "106"},
-            };
-
-            context.Kabinets.AddRange(kabinets);
-            context.SaveChanges();
-
-            var classes = new Class[]
-            {
-                new Class { Name = "1A", TeacherID = 1, KabinetID = 1},
-                new Class { Name = "2A", TeacherID = 2, KabinetID = 1},
-                new Class { Name = "3A", TeacherID = 1, KabinetID = 1}
-            };
-
-            context.Classes.AddRange(classes);
-            context.SaveChanges();
-
             var subjects = new Subject[]
             {
                 new Subject { Name = "Mathematics" },
@@ -73,7 +73,7 @@ namespace Duplet_x_school.Data
                 new Subject { Name = "English" },
                 new Subject { Name = "Literature" },
                 new Subject { Name = "Physics" },
-                new Subject { Name = "Biology" },
+                new Subject { Name = "Biology" }
             };
 
             context.Subjects.AddRange(subjects);
@@ -81,8 +81,8 @@ namespace Duplet_x_school.Data
 
             var optsubjects = new OptSubject[]
             {
-                new OptSubject { Name = "Programming", StudentID = students.Single( s => s.FullName == "Alexander, Carson").ID, TeacherID = teachers.Single( s => s.FullName == "Maksimov, Pavel").ID},
-                new OptSubject { Name = "Robotics", StudentID = students.Single( s => s.FullName == "Alexander, Veronica").ID, TeacherID = teachers.Single( s => s.FullName == "Abercrombie, Kim").ID},
+                new OptSubject { Name = "Programming"},
+                new OptSubject { Name = "Robotics"}
             };
 
             context.OptSubjects.AddRange(optsubjects);

@@ -37,7 +37,7 @@ namespace Duplet_x_school.Models
         }
         public ICollection<Subject> Subjects { get; set; }
         public ICollection<OptSubject> OptionalSubjects { get; set; }
-        public Kabinet Kabinet { get; set; }
+        public Kabinet? Kabinet { get; set; }
         public Class? Class { get; set; } 
     }
 }
