@@ -38,6 +38,9 @@ namespace Duplet_x_school.Data
                     HireDate = DateTime.Parse("1995-03-11")}
             };
 
+            context.Teachers.AddRange(teachers);
+            context.SaveChanges();
+
             var kabinets = new Kabinet[]
             {
                 new Kabinet {Name = "101"},
@@ -49,9 +52,6 @@ namespace Duplet_x_school.Data
             };
 
             context.Kabinets.AddRange(kabinets);
-            context.SaveChanges();
-
-            context.Teachers.AddRange(teachers);
             context.SaveChanges();
 
             var classes = new Class[]
