@@ -35,7 +35,7 @@ namespace Duplet_x_school.Models
             get { return LastName + ", " + FirstMidName; }
 
         }
-        //gavno
+        public ICollection<Subject> Subjects { get; set; }
         public ICollection<OptSubject> OptionalSubjects { get; set; }
         public Kabinet Kabinet { get; set; }
         public Class? Class { get; set; } 
