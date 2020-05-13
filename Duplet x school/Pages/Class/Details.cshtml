@@ -1,0 +1,37 @@
+﻿@page
+@model Duplet_x_school.Pages.Class.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Class</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Class.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Class.KabinetID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class.KabinetID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Class.TeacherID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Class.TeacherID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Class.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
