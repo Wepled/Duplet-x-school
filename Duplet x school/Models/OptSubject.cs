@@ -7,7 +7,7 @@ namespace Duplet_x_school.Models
 {
     public class OptSubject
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

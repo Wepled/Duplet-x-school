@@ -9,7 +9,7 @@ namespace Duplet_x_school.Models
 
     {
 
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
 

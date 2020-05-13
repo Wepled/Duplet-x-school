@@ -31,9 +31,9 @@ namespace Duplet_x_school.Data
             var teachers = new Teacher[]
             {
                 new Teacher { FirstMidName = "Kim",     LastName = "Abercrombie",
-                    HireDate = DateTime.Parse("1995-03-11")},
+                    HireDate = DateTime.Parse("1995-03-11"), KabinetId = 1},
                 new Teacher { FirstMidName = "Pavel",     LastName = "Maksimov",
-                    HireDate = DateTime.Parse("1995-03-11")}
+                    HireDate = DateTime.Parse("1995-03-11"), KabinetId = 2}
             };
 
             context.Teachers.AddRange(teachers);
@@ -41,9 +41,9 @@ namespace Duplet_x_school.Data
 
             var classes = new Class[]
             {
-                new Class { Name = "1A", TeacherID = 1, KabinetID = 1},
-                new Class { Name = "2A", TeacherID = 2, KabinetID = 1},
-                new Class { Name = "3A", TeacherID = 1, KabinetID = 1}
+                new Class { Name = "1A", TeacherId = 1, KabinetId = 1},
+                new Class { Name = "2A", TeacherId = 2, KabinetId = 1},
+                new Class { Name = "3A", TeacherId = 1, KabinetId = 1}
             };
 
             context.Classes.AddRange(classes);

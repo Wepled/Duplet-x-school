@@ -9,7 +9,7 @@ namespace Duplet_x_school.Models
 {
     public class Teacher
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Last Name")]
@@ -37,7 +37,7 @@ namespace Duplet_x_school.Models
         }
         public ICollection<Subject> Subjects { get; set; }
         public ICollection<OptSubject> OptionalSubjects { get; set; }
-        public Kabinet? Kabinet { get; set; }
-        public Class? Class { get; set; } 
+        public int KabinetId { get; set; }
+        public int? ClassId { get; set; } 
     }
 }
