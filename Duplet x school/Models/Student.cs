@@ -29,14 +29,6 @@ namespace Duplet_x_school.Models
 
         public string FirstMidName { get; set; }
 
-        [DataType(DataType.Date)]
-
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-
-        [Display(Name = "Enrollment Date")]
-
-        public DateTime EnrollmentDate { get; set; }
-
         [Display(Name = "Full Name")]
 
         public string FullName
@@ -53,9 +45,10 @@ namespace Duplet_x_school.Models
 
         }
 
+        public int ClassID { get; set; }
 
-
-        public ICollection<OptionalSubject> OptionalSubjects { get; set; }
+        public ICollection<OptSubject> OptionalSubjects { get; set; }
+        public ICollection<Subject> Subjects { get; set; }
 
     }
 }
