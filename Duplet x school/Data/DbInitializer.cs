@@ -81,8 +81,8 @@ namespace Duplet_x_school.Data
 
             var optsubjects = new OptSubject[]
             {
-                new OptSubject { Name = "Programming", StudentID = students.Single( s => s.FullName == "Alexander, Carson").ID, TeacherID = teachers.Single( s => s.FullName == "Maksimov, Pavel").ID},
-                new OptSubject { Name = "Robotics", StudentID = students.Single( s => s.FullName == "Alexander, Veronica").ID, TeacherID = teachers.Single( s => s.FullName == "Abercrombie, Kim").ID},
+                new OptSubject { Name = "Programming", StudentID = 1, TeacherID = 1},
+                new OptSubject { Name = "Robotics", StudentID = 2, TeacherID = 2},
             };
 
             context.OptSubjects.AddRange(optsubjects);
