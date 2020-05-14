@@ -46,7 +46,7 @@ namespace Duplet_x_school.Data
                 new SchoolClass { Name = "3A", TeacherId = 1, KabinetId = 1}
             };
 
-            context.Classes.AddRange(classes);
+            context.SchoolClasses.AddRange(classes);
             context.SaveChanges();
 
             var students = new Student[]
