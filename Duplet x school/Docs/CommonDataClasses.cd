@@ -1,42 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Duplet_x_school.Models.Kabinet">
-    <Position X="2" Y="1.75" Width="1.5" />
+    <Position X="5.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Kabinet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Duplet_x_school.Models.OptSubject">
-    <Position X="11" Y="1.25" Width="1.5" />
+    <Position X="5.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\OptSubject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Duplet_x_school.Models.OptSubjectEnrollment">
-    <Position X="12.75" Y="1.25" Width="1.5" />
+    <Position X="11" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Models\OptSubjectEnrollment.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Duplet_x_school.Models.OptSubjectTeacherAssignment">
-    <Position X="9" Y="7.25" Width="1.5" />
+    <Position X="9.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAgAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\OptSubjectTeacherAssignment.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Duplet_x_school.Models.SchoolClass">
-    <Position X="2" Y="4" Width="1.5" />
+    <Position X="7.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAICAAAAAAAAAAAAAAAACAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\SchoolClass.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Duplet_x_school.Models.Student">
-    <Position X="11" Y="6.5" Width="1.5" />
+    <Position X="7.25" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACACAEAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAgEAg=</HashCode>
       <FileName>Models\Student.cs</FileName>
@@ -50,21 +50,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Duplet_x_school.Models.SubjectAssignment">
-    <Position X="12.75" Y="4" Width="1.5" />
+    <Position X="3.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAEAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\SubjectAssignment.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Duplet_x_school.Models.SubjectTeacherAssignment">
-    <Position X="11" Y="3" Width="1.5" />
+    <Position X="9" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAEAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\SubjectTeacherAssignment.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Duplet_x_school.Models.Teacher">
-    <Position X="4.75" Y="1.75" Width="1.5" />
+    <Position X="7.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAEAgAAAAAIAAAAAAAAAAACAEAAAAAAAAAAAgEAg=</HashCode>
       <FileName>Models\Teacher.cs</FileName>
