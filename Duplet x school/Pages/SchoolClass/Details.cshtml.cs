@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using Duplet_x_school.Data;
 using Duplet_x_school.Models;
 
-namespace Duplet_x_school.Pages.Class
+namespace Duplet_x_school.Pages.SchoolClass
 {
     public class DetailsModel : PageModel
     {
-        private readonly Duplet_x_school.Data.Duplet_x_schoolContext _context;
+        private readonly Duplet_x_school.Data.SchoolContext _context;
 
-        public DetailsModel(Duplet_x_school.Data.Duplet_x_schoolContext context)
+        public DetailsModel(Duplet_x_school.Data.SchoolContext context)
         {
             _context = context;
         }
 
-        public Class Class { get; set; }
+        public Models.SchoolClass SchoolClass { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,9 @@ namespace Duplet_x_school.Pages.Class
                 return NotFound();
             }
 
-            Class = await _context.Class.FirstOrDefaultAsync(m => m.ID == id);
+            SchoolClass = await _context.Classes.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Class == null)
+            if (SchoolClass == null)
             {
                 return NotFound();
             }

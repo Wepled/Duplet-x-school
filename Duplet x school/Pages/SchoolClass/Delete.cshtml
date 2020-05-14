@@ -1,5 +1,5 @@
 ﻿@page
-@model Duplet_x_school.Pages.Class.DeleteModel
+@model Duplet_x_school.Pages.SchoolClass.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -9,31 +9,31 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Class</h4>
+    <h4>SchoolClass</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Class.Name)
+            @Html.DisplayNameFor(model => model.SchoolClass.Name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Class.Name)
+            @Html.DisplayFor(model => model.SchoolClass.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Class.KabinetID)
+            @Html.DisplayNameFor(model => model.SchoolClass.KabinetId)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Class.KabinetID)
+            @Html.DisplayFor(model => model.SchoolClass.KabinetId)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Class.TeacherID)
+            @Html.DisplayNameFor(model => model.SchoolClass.TeacherId)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Class.TeacherID)
+            @Html.DisplayFor(model => model.SchoolClass.TeacherId)
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="Class.ID" />
+        <input type="hidden" asp-for="SchoolClass.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>
     </form>

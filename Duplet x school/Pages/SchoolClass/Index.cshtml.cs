@@ -8,22 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using Duplet_x_school.Data;
 using Duplet_x_school.Models;
 
-namespace Duplet_x_school.Pages.Class
+namespace Duplet_x_school.Pages.SchoolClass
 {
     public class IndexModel : PageModel
     {
-        private readonly Duplet_x_school.Data.Duplet_x_schoolContext _context;
+        private readonly Duplet_x_school.Data.SchoolContext _context;
 
-        public IndexModel(Duplet_x_school.Data.Duplet_x_schoolContext context)
+        public IndexModel(Duplet_x_school.Data.SchoolContext context)
         {
             _context = context;
         }
 
-        public IList<Class> Class { get;set; }
+        public IList<Models.SchoolClass> SchoolClass { get;set; }
 
         public async Task OnGetAsync()
         {
-            Class = await _context.Class.ToListAsync();
+            SchoolClass = await _context.Classes.ToListAsync();
         }
     }
 }

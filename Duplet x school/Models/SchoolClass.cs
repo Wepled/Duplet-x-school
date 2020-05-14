@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Duplet_x_school.Models
 {
-    public class Class
+    public class SchoolClass
     {
         public int Id { get; set; }
         public string Name { get; set; }

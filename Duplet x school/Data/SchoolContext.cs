@@ -18,7 +18,7 @@ namespace Duplet_x_school.Data
 
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Kabinet> Kabinets { get; set; }
-        public DbSet<Class> Classes { get; set; }
+        public DbSet<SchoolClass> Classes { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<OptSubject> OptSubjects { get; set; }
@@ -30,7 +30,7 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<Kabinet>().ToTable("Kabinet");
 
-            modelBuilder.Entity<Class>().ToTable("Class");
+            modelBuilder.Entity<SchoolClass>().ToTable("Class");
 
             modelBuilder.Entity<Student>().ToTable("Student");
             

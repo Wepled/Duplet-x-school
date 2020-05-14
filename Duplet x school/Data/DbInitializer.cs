@@ -39,11 +39,11 @@ namespace Duplet_x_school.Data
             context.Teachers.AddRange(teachers);
             context.SaveChanges();
 
-            var classes = new Class[]
+            var classes = new SchoolClass[]
             {
-                new Class { Name = "1A", TeacherId = 1, KabinetId = 1},
-                new Class { Name = "2A", TeacherId = 2, KabinetId = 1},
-                new Class { Name = "3A", TeacherId = 1, KabinetId = 1}
+                new SchoolClass { Name = "1A", TeacherId = 1, KabinetId = 1},
+                new SchoolClass { Name = "2A", TeacherId = 2, KabinetId = 1},
+                new SchoolClass { Name = "3A", TeacherId = 1, KabinetId = 1}
             };
 
             context.Classes.AddRange(classes);

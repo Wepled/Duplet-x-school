@@ -39,7 +39,7 @@ namespace Duplet_x_school
             services.AddDbContext<SchoolContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SchoolContext")));
 
-            services.AddDbContext<Duplet_x_schoolContext>(options =>
+            services.AddDbContext<SchoolContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("Duplet_x_schoolContext")));
         }
 
