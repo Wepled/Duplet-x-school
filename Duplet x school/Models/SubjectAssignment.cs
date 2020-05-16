@@ -8,8 +8,10 @@ namespace Duplet_x_school.Models
 {
     public class SubjectAssignment
     {
-        public int Id { get; set; }
         public int SubjectId { get; set; }
         public int SchoolClassId { get; set; }
+        public Subject Subject { get; set; }
+        public SchoolClass SchoolClass { get; set; }
+
     }
 }
