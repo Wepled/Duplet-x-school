@@ -6,9 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Duplet_x_school.Models
 {
     public class Student
-
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -44,11 +42,7 @@ namespace Duplet_x_school.Models
             }
 
         }
-
-        public int SchoolClassID { get; set; }
-
-        public ICollection<OptSubject> OptionalSubjects { get; set; }
-        public ICollection<Subject> Subjects { get; set; }
-
+        public ICollection<StudentSchoolClassEnrollment> StudentSchoolClassEnrollments { get; set; }
+        public ICollection<StudentOptSubjectEnrollment> StudentOptSubjectEnrollments { get; set; }
     }
 }

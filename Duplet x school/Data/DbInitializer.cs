@@ -51,14 +51,10 @@ namespace Duplet_x_school.Data
 
             var students = new Student[]
             {
-                new Student { FirstMidName = "Carson",   LastName = "Alexander",
-                     SchoolClassID = 1},
-                new Student { FirstMidName = "Ilya",   LastName = "Alexander",
-                    SchoolClassID = 1},
-                new Student { FirstMidName = "Veronica",   LastName = "Alexander",
-                    SchoolClassID = 2},
-                new Student { FirstMidName = "Nikita",   LastName = "Alexander",
-                    SchoolClassID = 3}
+                new Student { FirstMidName = "Carson",   LastName = "Alexander"},
+                new Student { FirstMidName = "Ilya",   LastName = "Filimonau"},
+                new Student { FirstMidName = "Veronica",   LastName = "Vanadzins"},
+                new Student { FirstMidName = "Nikita",   LastName = "Shamlov"}
             };
 
             context.Students.AddRange(students);
@@ -88,10 +84,10 @@ namespace Duplet_x_school.Data
             context.OptSubjects.AddRange(optsubjects);
             context.SaveChanges();
 
-            var optsubjectenrollments = new OptSubjectEnrollment[]
+            var optsubjectenrollments = new StudentOptSubjectEnrollment[]
             {
-                new OptSubjectEnrollment { OptSubjectId = 1, StudentId = 1 },
-                new OptSubjectEnrollment { OptSubjectId = 2, StudentId = 2 }
+                new StudentOptSubjectEnrollment { OptSubjectId = 1, StudentId = 1 },
+                new StudentOptSubjectEnrollment { OptSubjectId = 2, StudentId = 2 }
             };
 
             context.OptSubjectEnrollments.AddRange(optsubjectenrollments);
@@ -108,22 +104,42 @@ namespace Duplet_x_school.Data
             context.SaveChanges();
 
 
-            var subjectassignments = new SubjectAssignment[]
+            var subjectassignments = new SchoolClassSubjectAssignment[]
             {
-                new SubjectAssignment { SubjectId = 1, SchoolClassId = 1 },
-                new SubjectAssignment { SubjectId = 2, SchoolClassId = 2 }
+                new SchoolClassSubjectAssignment { SubjectId = 1, SchoolClassId = 1 },
+                new SchoolClassSubjectAssignment { SubjectId = 2, SchoolClassId = 2 }
             };
 
             context.SubjectAssignments.AddRange(subjectassignments);
             context.SaveChanges();
 
-            var subjectteacherassignments = new SubjectTeacherAssignment[]
+            var subjectteacherassignments = new TeacherSubjectAssignment[]
             {
-                new SubjectTeacherAssignment { SubjectId = 1, TeacherId = 1 },
-                new SubjectTeacherAssignment { SubjectId = 2, TeacherId = 2 }
+                new TeacherSubjectAssignment { SubjectId = 1, TeacherId = 1 },
+                new TeacherSubjectAssignment { SubjectId = 2, TeacherId = 2 }
             };
 
             context.SubjectTeacherAssignments.AddRange(subjectteacherassignments);
+            context.SaveChanges();
+
+            var studentschoolclassenrollments = new StudentSchoolClassEnrollment[]
+            {
+                new StudentSchoolClassEnrollment { StudentId = 1, SchoolClassId = 1 },
+                new StudentSchoolClassEnrollment { StudentId = 3, SchoolClassId = 2 },
+                new StudentSchoolClassEnrollment { StudentId = 4, SchoolClassId = 3 },
+                new StudentSchoolClassEnrollment { StudentId = 2, SchoolClassId = 1 }
+            };
+
+            context.StudentSchoolClassEnrollments.AddRange(studentschoolclassenrollments);
+            context.SaveChanges();
+
+            var teacherschoolclassassignments = new TeacherSchoolClassAssignment[]
+            {
+                new TeacherSchoolClassAssignment {TeacherId = 1, SchoolClassId = 1},
+                new TeacherSchoolClassAssignment {TeacherId = 2, SchoolClassId = 2}
+            };
+
+            context.TeacherSchoolClassAssignments.AddRange(teacherschoolclassassignments);
             context.SaveChanges();
         }
     }

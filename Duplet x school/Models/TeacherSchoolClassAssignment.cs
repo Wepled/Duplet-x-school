@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Duplet_x_school.Models
 {
-    public class SubjectTeacherAssignment
+    public class TeacherSchoolClassAssignment
     {
         public int TeacherId { get; set; }
-        public int SubjectId { get; set; }
+        public int SchoolClassId { get; set; }
         public Teacher Teacher { get; set; }
-        public Subject Subject { get; set; }
+        public SchoolClass SchoolClass { get; set; }
     }
 }

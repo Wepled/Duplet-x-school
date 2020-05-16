@@ -22,19 +22,20 @@ namespace Duplet_x_school.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<OptSubject> OptSubjects { get; set; }
-        public DbSet<OptSubjectEnrollment> OptSubjectEnrollments { get; set; }
+        public DbSet<StudentOptSubjectEnrollment> OptSubjectEnrollments { get; set; }
         public DbSet<OptSubjectTeacherAssignment> OptSubjectTeacherAssignments { get; set; }
-        public DbSet<SubjectAssignment> SubjectAssignments { get; set; }
-        public DbSet<SubjectTeacherAssignment> SubjectTeacherAssignments { get; set; }
+        public DbSet<SchoolClassSubjectAssignment> SubjectAssignments { get; set; }
+        public DbSet<TeacherSubjectAssignment> SubjectTeacherAssignments { get; set; }
+        public DbSet<StudentSchoolClassEnrollment> StudentSchoolClassEnrollments { get; set; }
+        public DbSet<TeacherSchoolClassAssignment> TeacherSchoolClassAssignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Kabinet>().ToTable("Kabinet");
 
             modelBuilder.Entity<Teacher>().ToTable("Teacher");
 
-            modelBuilder.Entity<Kabinet>().ToTable("Kabinet");
-
-            modelBuilder.Entity<SchoolClass>().ToTable("Class");
+            modelBuilder.Entity<SchoolClass>().ToTable("SchoolClass");
 
             modelBuilder.Entity<Student>().ToTable("Student");
             
@@ -42,19 +43,30 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<OptSubject>().ToTable("OptSubject");
 
-            modelBuilder.Entity<OptSubjectEnrollment>().ToTable("OptSubjectEnrollment");
+            modelBuilder.Entity<StudentOptSubjectEnrollment>().ToTable("OptSubjectEnrollment");
 
             modelBuilder.Entity<OptSubjectTeacherAssignment>().ToTable("OptSubjectTeacherAssignment");
 
-            modelBuilder.Entity<SubjectAssignment>().ToTable("SubjectAssignment");
+            modelBuilder.Entity<SchoolClassSubjectAssignment>().ToTable("SchoolClassSubjectAssignment");
 
-            modelBuilder.Entity<SubjectTeacherAssignment>().ToTable("SubjectTeacherAssignment");
+            modelBuilder.Entity<TeacherSubjectAssignment>().ToTable("SubjectTeacherAssignment");
+
+            modelBuilder.Entity<StudentSchoolClassEnrollment>().ToTable("StudentSchoolClassEnrollment");
 
             modelBuilder.Entity<OptSubjectTeacherAssignment>()
                 .HasKey(c => new { c.OptSubjectId, c.TeacherId });
 
-            modelBuilder.Entity<SubjectTeacherAssignment>()
+            modelBuilder.Entity<TeacherSubjectAssignment>()
                 .HasKey(c => new { c.SubjectId, c.TeacherId });
+
+            modelBuilder.Entity<SchoolClassSubjectAssignment>()
+                .HasKey(c => new { c.SubjectId, c.SchoolClassId });
+
+            modelBuilder.Entity<TeacherSubjectAssignment>()
+                .HasKey(c => new {c.SubjectId, c.TeacherId});
+
+            modelBuilder.Entity<TeacherSchoolClassAssignment>()
+                .HasKey(c => new { c.TeacherId, c.SchoolClassId });
         }
 
     }
