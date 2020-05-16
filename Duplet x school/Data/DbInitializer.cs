@@ -90,8 +90,8 @@ namespace Duplet_x_school.Data
 
             var optsubjectenrollments = new OptSubjectEnrollment[]
             {
-                new OptSubjectEnrollment { OptSubjectId = 1; StudentId = 1 },
-                new OptSubjectEnrollment { OptSubjectId = 2; StudentId = 2 }
+                new OptSubjectEnrollment { OptSubjectId = 1, StudentId = 1 },
+                new OptSubjectEnrollment { OptSubjectId = 2, StudentId = 2 }
             };
 
             context.OptSubjectEnrollments.AddRange(optsubjectenrollments);
@@ -100,8 +100,8 @@ namespace Duplet_x_school.Data
     
             var optsubjectteacherassignments = new OptSubjectTeacherAssignment[]
             {
-                new OptSubjectTeacherAssignment { OptSubjectId = 1; TeacherId = 1 },
-                new OptSubjectTeacherAssignment { OptSubjectId = 2; TeacherId = 2 }
+                new OptSubjectTeacherAssignment { OptSubjectId = 1, TeacherId = 1 },
+                new OptSubjectTeacherAssignment { OptSubjectId = 2, TeacherId = 2 }
             };
 
             context.OptSubjectTeacherAssignments.AddRange(optsubjectteacherassignments);
@@ -110,8 +110,8 @@ namespace Duplet_x_school.Data
 
             var subjectassignments = new SubjectAssignment[]
             {
-                new SubjectAssignment { SubjectId = 1; SchoolClassId = 1 },
-                new SubjectAssignment { SubjectId = 2; SchoolClassId = 2 }
+                new SubjectAssignment { SubjectId = 1, SchoolClassId = 1 },
+                new SubjectAssignment { SubjectId = 2, SchoolClassId = 2 }
             };
 
             context.SubjectAssignments.AddRange(subjectassignments);
@@ -119,8 +119,8 @@ namespace Duplet_x_school.Data
 
             var subjectteacherassignments = new SubjectTeacherAssignment[]
             {
-                new SubjectTeacherAssignment { SubjectId = 1; TeacherId = 1 },
-                new SubjectTeacherAssignment { SubjectId = 2; TeacherId = 2 }
+                new SubjectTeacherAssignment { SubjectId = 1, TeacherId = 1 },
+                new SubjectTeacherAssignment { SubjectId = 2, TeacherId = 2 }
             };
 
             context.SubjectTeacherAssignments.AddRange(subjectteacherassignments);
