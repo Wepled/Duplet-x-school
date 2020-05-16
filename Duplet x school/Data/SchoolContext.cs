@@ -22,6 +22,10 @@ namespace Duplet_x_school.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<OptSubject> OptSubjects { get; set; }
+        public DbSet<OptSubjectEnrollment> OptSubjectEnrollments { get; set; }
+        public DbSet<OptSubjectTeacherAssignment> OptSubjectTeacherAssignments { get; set; }
+        public DbSet<SubjectAssignment> SubjectAssignments { get; set; }
+        public DbSet<SubjectTeacherAssignment> SubjectTeacherAssignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +42,19 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<OptSubject>().ToTable("OptSubject");
 
+            modelBuilder.Entity<OptSubjectEnrollment>().ToTable("OptSubjectEnrollment");
+
+            modelBuilder.Entity<OptSubjectTeacherAssignment>().ToTable("OptSubjectTeacherAssignment");
+
+            modelBuilder.Entity<SubjectAssignment>().ToTable("SubjectAssignment");
+
+            modelBuilder.Entity<SubjectTeacherAssignment>().ToTable("SubjectTeacherAssignment");
+
+            modelBuilder.Entity<OptSubjectTeacherAssignment>()
+                .HasKey(c => new { c.OptSubjectId, c.TeacherId });
+
+            modelBuilder.Entity<SubjectTeacherAssignment>()
+                .HasKey(c => new { c.SubjectId, c.TeacherId });
         }
 
     }

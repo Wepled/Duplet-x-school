@@ -52,13 +52,13 @@ namespace Duplet_x_school.Data
             var students = new Student[]
             {
                 new Student { FirstMidName = "Carson",   LastName = "Alexander",
-                     ClassID = 1},
+                     SchoolClassId = 1},
                 new Student { FirstMidName = "Ilya",   LastName = "Alexander",
-                    ClassID = 1},
+                    SchoolClassId = 1},
                 new Student { FirstMidName = "Veronica",   LastName = "Alexander",
-                    ClassID = 2},
+                    SchoolClassId = 2},
                 new Student { FirstMidName = "Nikita",   LastName = "Alexander",
-                    ClassID = 3}
+                    SchoolClassId = 3}
             };
 
             context.Students.AddRange(students);
