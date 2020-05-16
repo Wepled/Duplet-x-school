@@ -45,7 +45,7 @@ namespace Duplet_x_school.Models
 
         }
 
-        public int ClassID { get; set; }
+        public int SchoolClassId { get; set; }
 
         public ICollection<OptSubject> OptionalSubjects { get; set; }
         public ICollection<Subject> Subjects { get; set; }
