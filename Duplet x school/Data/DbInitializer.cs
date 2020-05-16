@@ -66,14 +66,14 @@ namespace Duplet_x_school.Data
 
             var subjects = new Subject[]
             {
-                new Subject { Name = "Mathematics" },
-                new Subject { Name = "Chemistry" },
-                new Subject { Name = "Art" },
-                new Subject { Name = "Music" },
-                new Subject { Name = "English" },
-                new Subject { Name = "Literature" },
-                new Subject { Name = "Physics" },
-                new Subject { Name = "Biology" }
+                new Subject { Name = "Mathematics", Description = "This is mathematics" },
+                new Subject { Name = "Chemistry", Description = "This is chemisrty" },
+                new Subject { Name = "Art", Description = "This is art" },
+                new Subject { Name = "Music", Description = "This is music" },
+                new Subject { Name = "English", Description = "This is english" },
+                new Subject { Name = "Literature", Description = "This is literature" },
+                new Subject { Name = "Physics", Description = "This is physics" },
+                new Subject { Name = "Biology", Description = "This is biology" }
             };
 
             context.Subjects.AddRange(subjects);
@@ -81,11 +81,49 @@ namespace Duplet_x_school.Data
 
             var optsubjects = new OptSubject[]
             {
-                new OptSubject { Name = "Programming"},
-                new OptSubject { Name = "Robotics"}
+                new OptSubject { Name = "Programming", Description = "This is programming"},
+                new OptSubject { Name = "Robotics", Description = "This is robotics"}
             };
 
             context.OptSubjects.AddRange(optsubjects);
+            context.SaveChanges();
+
+            var optsubjectenrollments = new OptSubjectEnrollment[]
+            {
+                new OptSubjectEnrollment { OptSubjectId = 1; StudentId = 1 },
+                new OptSubjectEnrollment { OptSubjectId = 2; StudentId = 2 }
+            };
+
+            context.OptSubjectEnrollments.AddRange(optsubjectenrollments);
+            context.SaveChanges();
+            
+    
+            var optsubjectteacherassignments = new OptSubjectTeacherAssignment[]
+            {
+                new OptSubjectTeacherAssignment { OptSubjectId = 1; TeacherId = 1 },
+                new OptSubjectTeacherAssignment { OptSubjectId = 2; TeacherId = 2 }
+            };
+
+            context.OptSubjectTeacherAssignments.AddRange(optsubjectteacherassignments);
+            context.SaveChanges();
+
+
+            var subjectassignments = new SubjectAssignment[]
+            {
+                new SubjectAssignment { SubjectId = 1; SchoolClassId = 1 },
+                new SubjectAssignment { SubjectId = 2; SchoolClassId = 2 }
+            };
+
+            context.SubjectAssignments.AddRange(subjectassignments);
+            context.SaveChanges();
+
+            var subjectteacherassignments = new SubjectTeacherAssignment[]
+            {
+                new SubjectTeacherAssignment { SubjectId = 1; TeacherId = 1 },
+                new SubjectTeacherAssignment { SubjectId = 2; TeacherId = 2 }
+            };
+
+            context.SubjectTeacherAssignments.AddRange(subjectteacherassignments);
             context.SaveChanges();
         }
     }

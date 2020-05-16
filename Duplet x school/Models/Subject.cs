@@ -6,6 +6,6 @@ namespace Duplet_x_school.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Descriprion { get; set; }
+        public string Description { get; set; }
     }
 }
