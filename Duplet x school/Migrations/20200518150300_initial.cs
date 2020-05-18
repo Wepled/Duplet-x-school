@@ -21,18 +21,58 @@ namespace Duplet_x_school.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SchoolClass",
+                name: "OptSubject",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    KabinetId = table.Column<int>(nullable: false),
-                    TeacherId = table.Column<int>(nullable: false)
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OptSubject", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SchoolClass",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SchoolClass", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Student",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Student", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Subject",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subject", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,103 +83,59 @@ namespace Duplet_x_school.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    HireDate = table.Column<DateTime>(nullable: false),
-                    KabinetId = table.Column<int>(nullable: false)
+                    HireDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teacher", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SchoolClassKabinetAssignment",
+                columns: table => new
+                {
+                    SchoolClassId = table.Column<int>(nullable: false),
+                    KabinetId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SchoolClassKabinetAssignment", x => new { x.SchoolClassId, x.KabinetId });
                     table.ForeignKey(
-                        name: "FK_Teacher_Kabinet_KabinetId",
+                        name: "FK_SchoolClassKabinetAssignment_Kabinet_KabinetId",
                         column: x => x.KabinetId,
                         principalTable: "Kabinet",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Student",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    SchoolClassId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Student", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Student_SchoolClass_SchoolClassId",
-                        column: x => x.SchoolClassId,
-                        principalTable: "SchoolClass",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OptSubject",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    TeacherId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OptSubject", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OptSubject_Teacher_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teacher",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Subject",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    TeacherId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subject", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Subject_Teacher_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teacher",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TeacherSchoolClassAssignments",
-                columns: table => new
-                {
-                    TeacherId = table.Column<int>(nullable: false),
-                    SchoolClassId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TeacherSchoolClassAssignments", x => new { x.TeacherId, x.SchoolClassId });
-                    table.ForeignKey(
-                        name: "FK_TeacherSchoolClassAssignments_SchoolClass_SchoolClassId",
+                        name: "FK_SchoolClassKabinetAssignment_SchoolClass_SchoolClassId",
                         column: x => x.SchoolClassId,
                         principalTable: "SchoolClass",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentOptSubjectEnrollment",
+                columns: table => new
+                {
+                    StudentOptSubjectEnrollmentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OptSubjectId = table.Column<int>(nullable: false),
+                    StudentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentOptSubjectEnrollment", x => x.StudentOptSubjectEnrollmentId);
                     table.ForeignKey(
-                        name: "FK_TeacherSchoolClassAssignments_Teacher_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teacher",
+                        name: "FK_StudentOptSubjectEnrollment_OptSubject_OptSubjectId",
+                        column: x => x.OptSubjectId,
+                        principalTable: "OptSubject",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentOptSubjectEnrollment_Student_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Student",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -166,56 +162,6 @@ namespace Duplet_x_school.Migrations
                         name: "FK_StudentSchoolClassEnrollment_Student_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Student",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OptSubjectEnrollment",
-                columns: table => new
-                {
-                    StudentOptSubjectEnrollmentId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OptSubjectId = table.Column<int>(nullable: false),
-                    StudentId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OptSubjectEnrollment", x => x.StudentOptSubjectEnrollmentId);
-                    table.ForeignKey(
-                        name: "FK_OptSubjectEnrollment_OptSubject_OptSubjectId",
-                        column: x => x.OptSubjectId,
-                        principalTable: "OptSubject",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OptSubjectEnrollment_Student_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Student",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OptSubjectTeacherAssignment",
-                columns: table => new
-                {
-                    TeacherId = table.Column<int>(nullable: false),
-                    OptSubjectId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OptSubjectTeacherAssignment", x => new { x.OptSubjectId, x.TeacherId });
-                    table.ForeignKey(
-                        name: "FK_OptSubjectTeacherAssignment_OptSubject_OptSubjectId",
-                        column: x => x.OptSubjectId,
-                        principalTable: "OptSubject",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OptSubjectTeacherAssignment_Teacher_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teacher",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -268,25 +214,82 @@ namespace Duplet_x_school.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_OptSubject_TeacherId",
-                table: "OptSubject",
-                column: "TeacherId");
+            migrationBuilder.CreateTable(
+                name: "TeacherKabinetAssignment",
+                columns: table => new
+                {
+                    TeacherId = table.Column<int>(nullable: false),
+                    KabinetId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeacherKabinetAssignment", x => new { x.TeacherId, x.KabinetId });
+                    table.ForeignKey(
+                        name: "FK_TeacherKabinetAssignment_Kabinet_KabinetId",
+                        column: x => x.KabinetId,
+                        principalTable: "Kabinet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeacherKabinetAssignment_Teacher_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teacher",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeacherOptSubjectAssignment",
+                columns: table => new
+                {
+                    TeacherId = table.Column<int>(nullable: false),
+                    OptSubjectId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeacherOptSubjectAssignment", x => new { x.OptSubjectId, x.TeacherId });
+                    table.ForeignKey(
+                        name: "FK_TeacherOptSubjectAssignment_OptSubject_OptSubjectId",
+                        column: x => x.OptSubjectId,
+                        principalTable: "OptSubject",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeacherOptSubjectAssignment_Teacher_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teacher",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeacherSchoolClassAssignment",
+                columns: table => new
+                {
+                    TeacherId = table.Column<int>(nullable: false),
+                    SchoolClassId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeacherSchoolClassAssignment", x => new { x.TeacherId, x.SchoolClassId });
+                    table.ForeignKey(
+                        name: "FK_TeacherSchoolClassAssignment_SchoolClass_SchoolClassId",
+                        column: x => x.SchoolClassId,
+                        principalTable: "SchoolClass",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeacherSchoolClassAssignment_Teacher_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teacher",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OptSubjectEnrollment_OptSubjectId",
-                table: "OptSubjectEnrollment",
-                column: "OptSubjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OptSubjectEnrollment_StudentId",
-                table: "OptSubjectEnrollment",
-                column: "StudentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OptSubjectTeacherAssignment_TeacherId",
-                table: "OptSubjectTeacherAssignment",
-                column: "TeacherId");
+                name: "IX_SchoolClassKabinetAssignment_KabinetId",
+                table: "SchoolClassKabinetAssignment",
+                column: "KabinetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SchoolClassSubjectAssignment_SchoolClassId",
@@ -294,9 +297,14 @@ namespace Duplet_x_school.Migrations
                 column: "SchoolClassId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Student_SchoolClassId",
-                table: "Student",
-                column: "SchoolClassId");
+                name: "IX_StudentOptSubjectEnrollment_OptSubjectId",
+                table: "StudentOptSubjectEnrollment",
+                column: "OptSubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentOptSubjectEnrollment_StudentId",
+                table: "StudentOptSubjectEnrollment",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentSchoolClassEnrollment_SchoolClassId",
@@ -309,28 +317,34 @@ namespace Duplet_x_school.Migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subject_TeacherId",
-                table: "Subject",
-                column: "TeacherId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SubjectTeacherAssignment_TeacherId",
                 table: "SubjectTeacherAssignment",
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teacher_KabinetId",
-                table: "Teacher",
+                name: "IX_TeacherKabinetAssignment_KabinetId",
+                table: "TeacherKabinetAssignment",
                 column: "KabinetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherSchoolClassAssignments_SchoolClassId",
-                table: "TeacherSchoolClassAssignments",
+                name: "IX_TeacherKabinetAssignment_TeacherId",
+                table: "TeacherKabinetAssignment",
+                column: "TeacherId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeacherOptSubjectAssignment_TeacherId",
+                table: "TeacherOptSubjectAssignment",
+                column: "TeacherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeacherSchoolClassAssignment_SchoolClassId",
+                table: "TeacherSchoolClassAssignment",
                 column: "SchoolClassId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherSchoolClassAssignments_TeacherId",
-                table: "TeacherSchoolClassAssignments",
+                name: "IX_TeacherSchoolClassAssignment_TeacherId",
+                table: "TeacherSchoolClassAssignment",
                 column: "TeacherId",
                 unique: true);
         }
@@ -338,13 +352,13 @@ namespace Duplet_x_school.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "OptSubjectEnrollment");
-
-            migrationBuilder.DropTable(
-                name: "OptSubjectTeacherAssignment");
+                name: "SchoolClassKabinetAssignment");
 
             migrationBuilder.DropTable(
                 name: "SchoolClassSubjectAssignment");
+
+            migrationBuilder.DropTable(
+                name: "StudentOptSubjectEnrollment");
 
             migrationBuilder.DropTable(
                 name: "StudentSchoolClassEnrollment");
@@ -353,10 +367,13 @@ namespace Duplet_x_school.Migrations
                 name: "SubjectTeacherAssignment");
 
             migrationBuilder.DropTable(
-                name: "TeacherSchoolClassAssignments");
+                name: "TeacherKabinetAssignment");
 
             migrationBuilder.DropTable(
-                name: "OptSubject");
+                name: "TeacherOptSubjectAssignment");
+
+            migrationBuilder.DropTable(
+                name: "TeacherSchoolClassAssignment");
 
             migrationBuilder.DropTable(
                 name: "Student");
@@ -365,13 +382,16 @@ namespace Duplet_x_school.Migrations
                 name: "Subject");
 
             migrationBuilder.DropTable(
+                name: "Kabinet");
+
+            migrationBuilder.DropTable(
+                name: "OptSubject");
+
+            migrationBuilder.DropTable(
                 name: "SchoolClass");
 
             migrationBuilder.DropTable(
                 name: "Teacher");
-
-            migrationBuilder.DropTable(
-                name: "Kabinet");
         }
     }
 }

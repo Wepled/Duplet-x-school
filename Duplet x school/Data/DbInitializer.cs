@@ -31,9 +31,9 @@ namespace Duplet_x_school.Data
             var teachers = new Teacher[]
             {
                 new Teacher { FirstMidName = "Kim",     LastName = "Abercrombie",
-                    HireDate = DateTime.Parse("1995-03-11"), KabinetId = 1},
+                    HireDate = DateTime.Parse("1995-03-11")},
                 new Teacher { FirstMidName = "Pavel",     LastName = "Maksimov",
-                    HireDate = DateTime.Parse("1995-03-11"), KabinetId = 2}
+                    HireDate = DateTime.Parse("1995-03-11")}
             };
 
             context.Teachers.AddRange(teachers);
@@ -41,9 +41,9 @@ namespace Duplet_x_school.Data
 
             var classes = new SchoolClass[]
             {
-                new SchoolClass { Name = "1A", TeacherId = 1, KabinetId = 1},
-                new SchoolClass { Name = "2A", TeacherId = 2, KabinetId = 1},
-                new SchoolClass { Name = "3A", TeacherId = 1, KabinetId = 1}
+                new SchoolClass { Name = "1A"},
+                new SchoolClass { Name = "2A"},
+                new SchoolClass { Name = "3A"}
             };
 
             context.SchoolClasses.AddRange(classes);
@@ -94,13 +94,13 @@ namespace Duplet_x_school.Data
             context.SaveChanges();
             
     
-            var optsubjectteacherassignments = new OptSubjectTeacherAssignment[]
+            var teacheroptsubjectassignments = new TeacherOptSubjectAssignment[]
             {
-                new OptSubjectTeacherAssignment { OptSubjectId = 1, TeacherId = 1 },
-                new OptSubjectTeacherAssignment { OptSubjectId = 2, TeacherId = 2 }
+                new TeacherOptSubjectAssignment { OptSubjectId = 1, TeacherId = 1 },
+                new TeacherOptSubjectAssignment { OptSubjectId = 2, TeacherId = 2 }
             };
 
-            context.OptSubjectTeacherAssignments.AddRange(optsubjectteacherassignments);
+            context.TeacherOptSubjectAssignments.AddRange(teacheroptsubjectassignments);
             context.SaveChanges();
 
 
@@ -140,6 +140,25 @@ namespace Duplet_x_school.Data
             };
 
             context.TeacherSchoolClassAssignments.AddRange(teacherschoolclassassignments);
+            context.SaveChanges();
+
+            var schoolclasskabinetassignments = new SchoolClassKabinetAssignment[]
+            {
+                new SchoolClassKabinetAssignment {SchoolClassId = 1, KabinetId = 1},
+                new SchoolClassKabinetAssignment {SchoolClassId = 2, KabinetId = 3},
+                new SchoolClassKabinetAssignment {SchoolClassId = 3, KabinetId = 4}
+            };
+
+            context.SchoolClassKabinetAssignments.AddRange(schoolclasskabinetassignments);
+            context.SaveChanges();
+
+            var teacherkabinetassignments = new TeacherKabinetAssignment[]
+            {
+                new TeacherKabinetAssignment {TeacherId = 1, KabinetId = 1},
+                new TeacherKabinetAssignment {TeacherId = 2, KabinetId = 5}
+            };
+
+            context.TeacherKabinetAssignments.AddRange(teacherkabinetassignments);
             context.SaveChanges();
         }
     }

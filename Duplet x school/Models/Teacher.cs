@@ -35,10 +35,9 @@ namespace Duplet_x_school.Models
             get { return LastName + ", " + FirstMidName; }
 
         }
-        public int KabinetId { get; set; }
-        public ICollection<Subject> Subjects { get; set; }
-        public ICollection<OptSubject> OptionalSubjects { get; set; }
+        public ICollection<TeacherSubjectAssignment> TeacherSubjectAssignments { get; set; }
+        public ICollection<TeacherOptSubjectAssignment> TeacherOptSubjectAssignments { get; set; }
         public TeacherSchoolClassAssignment TeacherSchoolClassAssignment { get; set; }
-        public Kabinet Kabinet { get; set; }
+        public TeacherKabinetAssignment TeacherKabinetAssignment { get; set; }
     }
 }

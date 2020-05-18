@@ -23,11 +23,13 @@ namespace Duplet_x_school.Data
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<OptSubject> OptSubjects { get; set; }
         public DbSet<StudentOptSubjectEnrollment> OptSubjectEnrollments { get; set; }
-        public DbSet<OptSubjectTeacherAssignment> OptSubjectTeacherAssignments { get; set; }
+        public DbSet<TeacherOptSubjectAssignment> TeacherOptSubjectAssignments { get; set; }
         public DbSet<SchoolClassSubjectAssignment> SubjectAssignments { get; set; }
         public DbSet<TeacherSubjectAssignment> SubjectTeacherAssignments { get; set; }
         public DbSet<StudentSchoolClassEnrollment> StudentSchoolClassEnrollments { get; set; }
         public DbSet<TeacherSchoolClassAssignment> TeacherSchoolClassAssignments { get; set; }
+        public DbSet<TeacherKabinetAssignment> TeacherKabinetAssignments { get; set; }
+        public DbSet<SchoolClassKabinetAssignment> SchoolClassKabinetAssignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,9 +45,9 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<OptSubject>().ToTable("OptSubject");
 
-            modelBuilder.Entity<StudentOptSubjectEnrollment>().ToTable("OptSubjectEnrollment");
+            modelBuilder.Entity<StudentOptSubjectEnrollment>().ToTable("StudentOptSubjectEnrollment");
 
-            modelBuilder.Entity<OptSubjectTeacherAssignment>().ToTable("OptSubjectTeacherAssignment");
+            modelBuilder.Entity<TeacherOptSubjectAssignment>().ToTable("TeacherOptSubjectAssignment");
 
             modelBuilder.Entity<SchoolClassSubjectAssignment>().ToTable("SchoolClassSubjectAssignment");
 
@@ -53,7 +55,13 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<StudentSchoolClassEnrollment>().ToTable("StudentSchoolClassEnrollment");
 
-            modelBuilder.Entity<OptSubjectTeacherAssignment>()
+            modelBuilder.Entity<SchoolClassKabinetAssignment>().ToTable("SchoolClassKabinetAssignment");
+
+            modelBuilder.Entity<TeacherKabinetAssignment>().ToTable("TeacherKabinetAssignment");
+
+            modelBuilder.Entity<TeacherSchoolClassAssignment>().ToTable("TeacherSchoolClassAssignment");
+
+            modelBuilder.Entity<TeacherOptSubjectAssignment>()
                 .HasKey(c => new { c.OptSubjectId, c.TeacherId });
 
             modelBuilder.Entity<TeacherSubjectAssignment>()
@@ -67,6 +75,12 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<TeacherSchoolClassAssignment>()
                 .HasKey(c => new { c.TeacherId, c.SchoolClassId });
+
+            modelBuilder.Entity<TeacherKabinetAssignment>()
+                .HasKey(c => new { c.TeacherId, c.KabinetId });
+
+            modelBuilder.Entity<SchoolClassKabinetAssignment>()
+                .HasKey(c => new { c.SchoolClassId, c.KabinetId });
         }
 
     }
