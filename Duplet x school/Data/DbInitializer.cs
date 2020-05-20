@@ -87,7 +87,8 @@ namespace Duplet_x_school.Data
             var optsubjectenrollments = new StudentOptSubjectEnrollment[]
             {
                 new StudentOptSubjectEnrollment { OptSubjectId = 1, StudentId = 1 },
-                new StudentOptSubjectEnrollment { OptSubjectId = 2, StudentId = 2 }
+                new StudentOptSubjectEnrollment { OptSubjectId = 2, StudentId = 2 },
+                new StudentOptSubjectEnrollment { OptSubjectId = 2, StudentId = 1 }
             };
 
             context.OptSubjectEnrollments.AddRange(optsubjectenrollments);

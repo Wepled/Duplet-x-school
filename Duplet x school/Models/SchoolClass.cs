@@ -9,7 +9,8 @@ namespace Duplet_x_school.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<StudentSchoolClassEnrollment> StudentSchoolClassEnrollment { get; set; }
+        public ICollection<StudentSchoolClassEnrollment> StudentSchoolClassEnrollments { get; set; }
+        public SchoolClassKabinetAssignment SchoolClassKabinetAssignment { get; set; }
 
     }
 }

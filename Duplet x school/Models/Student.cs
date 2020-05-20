@@ -42,7 +42,7 @@ namespace Duplet_x_school.Models
             }
 
         }
-        public ICollection<StudentSchoolClassEnrollment> StudentSchoolClassEnrollments { get; set; }
+        public StudentSchoolClassEnrollment StudentSchoolClassEnrollment { get; set; }
         public ICollection<StudentOptSubjectEnrollment> StudentOptSubjectEnrollments { get; set; }
     }
 }
