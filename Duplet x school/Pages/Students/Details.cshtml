@@ -23,6 +23,40 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Student.FirstMidName)
         </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.IDCode)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.IDCode)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.StudentSchoolClassEnrollment.SchoolClass.Name)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.StudentSchoolClassEnrollment.SchoolClass.Name)
+        </dd>
+        <dd class="col-sm-2">
+            Optional Subjects
+        </dd>
+        <dd class="col-sm-10">
+            @{
+                foreach (var OptSub in Model.Student.StudentOptSubjectEnrollments)
+                {
+                    @Html.DisplayFor(modelItem => OptSub.OptSubject.Name) <br />
+                }
+            }
+        </dd>
+        <dd class="col-sm-2">
+            Grades
+        </dd>
+        <dd class="col-sm-10">
+            @{
+                foreach (var grade in Model.Student.StudentGradeses)
+                {
+                    @Html.DisplayFor(modelItem => grade.GradeInStr) <br />
+                }
+            }
+        </dd>
     </dl>
 </div>
 <div>

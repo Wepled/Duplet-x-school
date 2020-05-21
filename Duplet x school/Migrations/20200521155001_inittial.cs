@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Duplet_x_school.Migrations
 {
-    public partial class initial : Migration
+    public partial class inittial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,8 @@ namespace Duplet_x_school.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false)
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    IDCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,6 +163,31 @@ namespace Duplet_x_school.Migrations
                         name: "FK_StudentSchoolClassEnrollment_Student_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Student",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Grades",
+                columns: table => new
+                {
+                    StudentId = table.Column<int>(nullable: false),
+                    SubjectId = table.Column<int>(nullable: false),
+                    Grade = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grades", x => new { x.StudentId, x.SubjectId });
+                    table.ForeignKey(
+                        name: "FK_Grades_Student_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Student",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Grades_Subject_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subject",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -287,9 +313,20 @@ namespace Duplet_x_school.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Grades_SubjectId",
+                table: "Grades",
+                column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SchoolClassKabinetAssignment_KabinetId",
                 table: "SchoolClassKabinetAssignment",
                 column: "KabinetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SchoolClassKabinetAssignment_SchoolClassId",
+                table: "SchoolClassKabinetAssignment",
+                column: "SchoolClassId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SchoolClassSubjectAssignment_SchoolClassId",
@@ -314,7 +351,8 @@ namespace Duplet_x_school.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_StudentSchoolClassEnrollment_StudentId",
                 table: "StudentSchoolClassEnrollment",
-                column: "StudentId");
+                column: "StudentId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubjectTeacherAssignment_TeacherId",
@@ -351,6 +389,9 @@ namespace Duplet_x_school.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Grades");
+
             migrationBuilder.DropTable(
                 name: "SchoolClassKabinetAssignment");
 

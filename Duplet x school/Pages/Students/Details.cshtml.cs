@@ -28,7 +28,15 @@ namespace Duplet_x_school.Pages.Students
                 return NotFound();
             }
 
-            Student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
+            Student = await _context.Students
+                .Include(s => s.StudentOptSubjectEnrollments)
+                    .ThenInclude(e => e.OptSubject)
+                .Include(s => s.StudentSchoolClassEnrollment)
+                    .ThenInclude(e => e.SchoolClass)
+                .Include(s => s.StudentGradeses)
+                    .ThenInclude(e => e.Subject)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Student == null)
             {

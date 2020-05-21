@@ -51,10 +51,10 @@ namespace Duplet_x_school.Data
 
             var students = new Student[]
             {
-                new Student { FirstMidName = "Carson",   LastName = "Alexander"},
-                new Student { FirstMidName = "Ilya",   LastName = "Filimonau"},
-                new Student { FirstMidName = "Veronica",   LastName = "Vanadzins"},
-                new Student { FirstMidName = "Nikita",   LastName = "Shamlov"}
+                new Student { FirstMidName = "Carson",   LastName = "Alexander", IDCode = "12243"},
+                new Student { FirstMidName = "Ilya",   LastName = "Filimonau", IDCode = "12244"},
+                new Student { FirstMidName = "Veronica",   LastName = "Vanadzins", IDCode = "12245"},
+                new Student { FirstMidName = "Nikita",   LastName = "Shamlov", IDCode = "12246"}
             };
 
             context.Students.AddRange(students);
@@ -160,6 +160,18 @@ namespace Duplet_x_school.Data
             };
 
             context.TeacherKabinetAssignments.AddRange(teacherkabinetassignments);
+            context.SaveChanges();
+
+            var grades = new Grades[]
+            {
+                new Grades {StudentId = 1, SubjectId = 1, Grade = Grade.A},
+                new Grades {StudentId = 1, SubjectId = 4, Grade = Grade.B},
+                new Grades {StudentId = 1, SubjectId = 5, Grade = Grade.F},
+                new Grades {StudentId = 1, SubjectId = 2, Grade = Grade.A},
+                new Grades {StudentId = 2, SubjectId = 5, Grade = Grade.B}
+            };
+
+            context.Gradess.AddRange(grades);
             context.SaveChanges();
         }
     }

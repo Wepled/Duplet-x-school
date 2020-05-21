@@ -42,7 +42,10 @@ namespace Duplet_x_school.Models
             }
 
         }
+        [Display(Name = "ID code")]
+        public string IDCode { get; set; }
         public StudentSchoolClassEnrollment StudentSchoolClassEnrollment { get; set; }
         public ICollection<StudentOptSubjectEnrollment> StudentOptSubjectEnrollments { get; set; }
+        public ICollection<Grades> StudentGradeses { get; set; }
     }
 }

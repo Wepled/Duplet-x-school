@@ -19,6 +19,24 @@ namespace Duplet_x_school.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Duplet_x_school.Models.Grades", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId", "SubjectId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Grades");
+                });
+
             modelBuilder.Entity("Duplet_x_school.Models.Kabinet", b =>
                 {
                     b.Property<int>("Id")
@@ -79,6 +97,9 @@ namespace Duplet_x_school.Migrations
 
                     b.HasIndex("KabinetId");
 
+                    b.HasIndex("SchoolClassId")
+                        .IsUnique();
+
                     b.ToTable("SchoolClassKabinetAssignment");
                 });
 
@@ -109,6 +130,9 @@ namespace Duplet_x_school.Migrations
                         .HasColumnName("FirstName")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<string>("IDCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -159,7 +183,8 @@ namespace Duplet_x_school.Migrations
 
                     b.HasIndex("SchoolClassId");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("StudentId")
+                        .IsUnique();
 
                     b.ToTable("StudentSchoolClassEnrollment");
                 });
@@ -274,6 +299,21 @@ namespace Duplet_x_school.Migrations
                     b.ToTable("SubjectTeacherAssignment");
                 });
 
+            modelBuilder.Entity("Duplet_x_school.Models.Grades", b =>
+                {
+                    b.HasOne("Duplet_x_school.Models.Student", "Student")
+                        .WithMany("StudentGradeses")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Duplet_x_school.Models.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Duplet_x_school.Models.SchoolClassKabinetAssignment", b =>
                 {
                     b.HasOne("Duplet_x_school.Models.Kabinet", "Kabinet")
@@ -283,8 +323,8 @@ namespace Duplet_x_school.Migrations
                         .IsRequired();
 
                     b.HasOne("Duplet_x_school.Models.SchoolClass", "SchoolClass")
-                        .WithMany()
-                        .HasForeignKey("SchoolClassId")
+                        .WithOne("SchoolClassKabinetAssignment")
+                        .HasForeignKey("Duplet_x_school.Models.SchoolClassKabinetAssignment", "SchoolClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -322,14 +362,14 @@ namespace Duplet_x_school.Migrations
             modelBuilder.Entity("Duplet_x_school.Models.StudentSchoolClassEnrollment", b =>
                 {
                     b.HasOne("Duplet_x_school.Models.SchoolClass", "SchoolClass")
-                        .WithMany("StudentSchoolClassEnrollment")
+                        .WithMany("StudentSchoolClassEnrollments")
                         .HasForeignKey("SchoolClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Duplet_x_school.Models.Student", "Student")
-                        .WithMany("StudentSchoolClassEnrollments")
-                        .HasForeignKey("StudentId")
+                        .WithOne("StudentSchoolClassEnrollment")
+                        .HasForeignKey("Duplet_x_school.Models.StudentSchoolClassEnrollment", "StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

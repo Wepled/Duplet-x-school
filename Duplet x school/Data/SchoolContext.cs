@@ -30,6 +30,7 @@ namespace Duplet_x_school.Data
         public DbSet<TeacherSchoolClassAssignment> TeacherSchoolClassAssignments { get; set; }
         public DbSet<TeacherKabinetAssignment> TeacherKabinetAssignments { get; set; }
         public DbSet<SchoolClassKabinetAssignment> SchoolClassKabinetAssignments { get; set; }
+        public DbSet<Grades> Gradess { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +62,8 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<TeacherSchoolClassAssignment>().ToTable("TeacherSchoolClassAssignment");
 
+            modelBuilder.Entity<Grades>().ToTable("Grades");
+
             modelBuilder.Entity<TeacherOptSubjectAssignment>()
                 .HasKey(c => new { c.OptSubjectId, c.TeacherId });
 
@@ -81,6 +84,9 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<SchoolClassKabinetAssignment>()
                 .HasKey(c => new { c.SchoolClassId, c.KabinetId });
+
+            modelBuilder.Entity<Grades>()
+                .HasKey(c => new { c.StudentId, c.SubjectId });
         }
 
     }
