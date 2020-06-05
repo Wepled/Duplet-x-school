@@ -29,6 +29,40 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Teacher.HireDate)
         </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Teacher.TeacherKabinetAssignment.Kabinet.Name)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Teacher.TeacherKabinetAssignment.Kabinet.Name)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Teacher.TeacherSchoolClassAssignment.SchoolClass.Name)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Teacher.TeacherSchoolClassAssignment.SchoolClass.Name)
+        </dd>
+        <dd class="col-sm-2">
+            Optional Subjects
+        </dd>
+        <dd class="col-sm-10">
+            @{
+                foreach (var OptSub in Model.Teacher.TeacherOptSubjectAssignments)
+                {
+                    @Html.DisplayFor(modelItem => OptSub.OptSubject.Name) <br />
+                }
+            }
+        </dd>
+        <dd class="col-sm-2">
+            Subjects
+        </dd>
+        <dd class="col-sm-10">
+            @{
+                foreach (var subject in Model.Teacher.TeacherSubjectAssignments)
+                {
+                    @Html.DisplayFor(modelItem => subject.Subject.Name) <br />
+                }
+            }
+        </dd>
     </dl>
 </div>
 <div>

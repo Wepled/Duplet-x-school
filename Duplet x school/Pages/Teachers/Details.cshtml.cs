@@ -28,7 +28,17 @@ namespace Duplet_x_school.Pages.Teachers
                 return NotFound();
             }
 
-            Teacher = await _context.Teachers.FirstOrDefaultAsync(m => m.Id == id);
+            Teacher = await _context.Teachers
+                .Include(s => s.TeacherKabinetAssignment)
+                    .ThenInclude(e => e.Kabinet)
+                .Include(s => s.TeacherOptSubjectAssignments)
+                    .ThenInclude(e => e.OptSubject)
+                .Include(s => s.TeacherSchoolClassAssignment)
+                    .ThenInclude(e => e.SchoolClass)
+                .Include(s => s.TeacherSubjectAssignments)
+                    .ThenInclude(e => e.Subject)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Teacher == null)
             {
