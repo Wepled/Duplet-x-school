@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Duplet_x_school.Data;
 using Duplet_x_school.Models;
 
 namespace Duplet_x_school.Pages.Teachers
 {
-    public class CreateModel : PageModel
+    public class CreateModel : TeachersPageModel
     {
         private readonly Duplet_x_school.Data.SchoolContext _context;
 
@@ -21,25 +15,30 @@ namespace Duplet_x_school.Pages.Teachers
 
         public IActionResult OnGet()
         {
+            PopulateClassesDropDownList(_context);
             return Page();
         }
+
 
         [BindProperty]
         public Teacher Teacher { get; set; }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            var emptyTeacher = new Teacher();
+
+            if (await TryUpdateModelAsync<Teacher>(
+                 emptyTeacher,
+                 "teacher",   // Prefix for form value.
+                 s => s.Id, s => s.FirstMidName, s => s.LastName, s => s.HireDate, s => s.TeacherKabinetAssignment, s => s.TeacherSubjectAssignments, s => s.TeacherOptSubjectAssignments, s => s.TeacherSchoolClassAssignment))
             {
-                return Page();
+                _context.Teachers.Add(emptyTeacher);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
             }
 
-            _context.Teachers.Add(Teacher);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            PopulateClassesDropDownList(_context, emptyTeacher.TeacherSchoolClassAssignment.SchoolClassId);
+            return Page();
         }
     }
 }
