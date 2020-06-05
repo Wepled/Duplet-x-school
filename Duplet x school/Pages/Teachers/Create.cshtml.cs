@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Duplet_x_school.Models;
+using Duplet_x_school.Data;
 
 namespace Duplet_x_school.Pages.Teachers
 {
     public class CreateModel : TeachersPageModel
     {
-        private readonly Duplet_x_school.Data.SchoolContext _context;
+        private readonly SchoolContext _context;
 
-        public CreateModel(Duplet_x_school.Data.SchoolContext context)
+        public CreateModel(SchoolContext context)
         {
             _context = context;
         }

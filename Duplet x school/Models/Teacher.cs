@@ -37,6 +37,7 @@ namespace Duplet_x_school.Models
         }
         public ICollection<TeacherSubjectAssignment> TeacherSubjectAssignments { get; set; }
         public ICollection<TeacherOptSubjectAssignment> TeacherOptSubjectAssignments { get; set; }
+        [Display(Name = "Teacher Class")]
         public TeacherSchoolClassAssignment TeacherSchoolClassAssignment { get; set; }
         public TeacherKabinetAssignment TeacherKabinetAssignment { get; set; }
     }
