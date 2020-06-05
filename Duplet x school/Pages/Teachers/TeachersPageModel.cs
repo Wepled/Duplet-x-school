@@ -1,4 +1,5 @@
 ﻿using Duplet_x_school.Data;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Duplet_x_school.Pages.Teachers
 {
-    public class TeachersPageModel
+    public class TeachersPageModel : PageModel
     {
         public SelectList ClassNameSL { get; set; }
 
@@ -20,7 +21,7 @@ namespace Duplet_x_school.Pages.Teachers
                                    select d;
 
             ClassNameSL = new SelectList(classesQuery.AsNoTracking(),
-                        "DepartmentID", "Name", selectedClass);
+                        "SchoolClassId", "Name", selectedClass);
         }
     }
 }

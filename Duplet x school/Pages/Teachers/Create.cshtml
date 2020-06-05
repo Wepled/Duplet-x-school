@@ -29,6 +29,14 @@
                 <span asp-validation-for="Teacher.HireDate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Teacher.TeacherSchoolClassAssignment" class="control-label"></label>
+                <select asp-for="Teacher.TeacherSchoolClassAssignment.SchoolClassId" class="form-control"
+                        asp-items="@Model.ClassNameSL">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span asp-validation-for="Teacher.TeacherSchoolClassAssignment.SchoolClassId" class="text-danger" />
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
