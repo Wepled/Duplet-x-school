@@ -78,7 +78,9 @@ namespace Duplet_x_school.Data
             var optsubjects = new OptSubject[]
             {
                 new OptSubject { Name = "Programming", Description = "This is programming"},
-                new OptSubject { Name = "Robotics", Description = "This is robotics"}
+                new OptSubject { Name = "Robotics", Description = "This is robotics"},
+                new OptSubject { Name = "Cinema", Description = "This is cinema"},
+                new OptSubject { Name = "Drawing circle", Description = "This is Drawing circle"}
             };
 
             context.OptSubjects.AddRange(optsubjects);

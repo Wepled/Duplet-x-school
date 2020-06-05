@@ -11,7 +11,7 @@ using Duplet_x_school.Models;
 
 namespace Duplet_x_school.Pages.Students
 {
-    public class EditModel : PageModel
+    public class EditModel : StudentsPageModel
     {
         private readonly Duplet_x_school.Data.SchoolContext _context;
 
@@ -30,43 +30,60 @@ namespace Duplet_x_school.Pages.Students
                 return NotFound();
             }
 
-            Student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
+            Student = await _context.Students
+                .Include(c => c.StudentOptSubjectEnrollments).ThenInclude(c => c.OptSubject)
+                .Include(c => c.StudentSchoolClassEnrollment).ThenInclude(c => c.SchoolClass)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
+
 
             if (Student == null)
             {
                 return NotFound();
             }
+            PopulateStudentOptSubjects(_context, Student);
             return Page();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id, string[] selectedOptSubjects)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Student).State = EntityState.Modified;
+            var studentToUpdate = await _context.Students
+                .Include(c => c.StudentOptSubjectEnrollments).ThenInclude(c => c.OptSubject)
+                .Include(c => c.StudentSchoolClassEnrollment).ThenInclude(c => c.SchoolClass)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
-            try
+            if (studentToUpdate == null)
             {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Student>(
+                studentToUpdate,
+                "Student",
+                i => i.FirstMidName, i => i.LastName,
+                i => i.IDCode, i => i.StudentOptSubjectEnrollments))
+            {
+                if (String.IsNullOrWhiteSpace(
+                    studentToUpdate.StudentOptSubjectEnrollments.ToString()))
+                {
+                    studentToUpdate.StudentOptSubjectEnrollments = null;
+                }
+                UpdateInstructorCourses(_context, selectedOptSubjects, studentToUpdate);
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StudentExists(Student.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
+            UpdateInstructorCourses(_context, selectedOptSubjects, studentToUpdate);
+            PopulateStudentOptSubjects(_context, studentToUpdate);
+
+            return Page();
         }
 
         private bool StudentExists(int id)
