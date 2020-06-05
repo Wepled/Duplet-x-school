@@ -11,17 +11,17 @@ namespace Duplet_x_school.Pages.Teachers
 {
     public class TeachersPageModel : PageModel
     {
-        public SelectList ClassNameSL { get; set; }
+        public SelectList SchoolClassNameSL { get; set; }
 
         public void PopulateClassesDropDownList(SchoolContext _context,
-            object selectedClass = null)
+            object selectedSchoolClass = null)
         {
             var classesQuery = from d in _context.SchoolClasses
                                    orderby d.Name // Sort by name.
                                    select d;
 
-            ClassNameSL = new SelectList(classesQuery.AsNoTracking(),
-                        "SchoolClassId", "Name", selectedClass);
+            SchoolClassNameSL = new SelectList(classesQuery.AsNoTracking(),
+                        "Id", "Name", selectedSchoolClass);
         }
     }
 }
