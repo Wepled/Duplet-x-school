@@ -24,6 +24,8 @@ namespace Duplet_x_school.Pages.Teachers
             return Page();
         }
 
+
+
         [BindProperty]
         public Teacher Teacher { get; set; }
 
