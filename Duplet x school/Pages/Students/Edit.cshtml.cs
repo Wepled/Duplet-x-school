@@ -77,13 +77,13 @@ namespace Duplet_x_school.Pages.Students
                 {
                     studentToUpdate.StudentOptSubjectEnrollments = null;
                 }
-                UpdateInstructorCourses(_context, selectedOptSubjects, studentToUpdate);
+                UpdateStudentOptSubjects(_context, selectedOptSubjects, studentToUpdate);
                 UpdateStudentSchoolClass(_context, Student.StudentSchoolClassEnrollment.SchoolClassId, studentToUpdate);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
 
-            UpdateInstructorCourses(_context, selectedOptSubjects, studentToUpdate);
+            UpdateStudentOptSubjects(_context, selectedOptSubjects, studentToUpdate);
             PopulateStudentOptSubjects(_context, studentToUpdate);
             PopulateClassesDropDownList(_context, studentToUpdate.StudentSchoolClassEnrollment.SchoolClassId);
 

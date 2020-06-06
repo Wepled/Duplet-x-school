@@ -34,7 +34,7 @@ namespace Duplet_x_school.Pages.Students
             }
         }
 
-        public void UpdateInstructorCourses(SchoolContext context,
+        public void UpdateStudentOptSubjects(SchoolContext context,
             string[] selectedOptSubjects, Student studentToUpdate)
         {
 
