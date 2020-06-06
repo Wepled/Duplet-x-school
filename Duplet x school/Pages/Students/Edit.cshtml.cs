@@ -41,6 +41,8 @@ namespace Duplet_x_school.Pages.Students
             {
                 return NotFound();
             }
+
+            PopulateClassesDropDownList(_context);
             PopulateStudentOptSubjects(_context, Student);
             return Page();
         }
@@ -76,12 +78,14 @@ namespace Duplet_x_school.Pages.Students
                     studentToUpdate.StudentOptSubjectEnrollments = null;
                 }
                 UpdateInstructorCourses(_context, selectedOptSubjects, studentToUpdate);
+                UpdateStudentSchoolClass(_context, Student.StudentSchoolClassEnrollment.SchoolClassId, studentToUpdate);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
 
             UpdateInstructorCourses(_context, selectedOptSubjects, studentToUpdate);
             PopulateStudentOptSubjects(_context, studentToUpdate);
+            PopulateClassesDropDownList(_context, studentToUpdate.StudentSchoolClassEnrollment.SchoolClassId);
 
             return Page();
         }

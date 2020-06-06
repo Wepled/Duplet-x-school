@@ -5,12 +5,16 @@ using System.Threading.Tasks;
 using Duplet_x_school.Data;
 using Duplet_x_school.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+
 namespace Duplet_x_school.Pages.Students
 {
     public class StudentsPageModel : PageModel
     {
 
         public List<AssignedOptSubjectData> AssignedOptSubjectDataList;
+        public SelectList SchoolClassNameSL { get; set; }
 
         public void PopulateStudentOptSubjects(SchoolContext context,
                                                Student student)
@@ -70,6 +74,33 @@ namespace Duplet_x_school.Pages.Students
                 }
             }
         }
-    }
 
-}
+
+        public void PopulateClassesDropDownList(SchoolContext _context,
+            object selectedSchoolClass = null)
+        {
+            var classesQuery = from d in _context.SchoolClasses
+                orderby d.Name // Sort by name.
+                select d;
+
+            SchoolClassNameSL = new SelectList(classesQuery.AsNoTracking(),
+                "Id", "Name", selectedSchoolClass);
+        }
+        public void UpdateStudentSchoolClass(SchoolContext context,
+           int selectedSchoolClass, Student studentToUpdate)
+        {
+
+            var studentSchoolClass = studentToUpdate.StudentSchoolClassEnrollment.SchoolClassId;
+
+            context.Remove(studentToUpdate.StudentSchoolClassEnrollment);
+
+            studentToUpdate.StudentSchoolClassEnrollment =
+                new StudentSchoolClassEnrollment()
+                {
+                    StudentId = studentToUpdate.Id,
+                    SchoolClassId = selectedSchoolClass
+                };
+        }
+
+    }
+    }
