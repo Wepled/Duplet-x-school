@@ -132,6 +132,7 @@ namespace Duplet_x_school.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("IDCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")

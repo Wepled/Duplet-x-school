@@ -42,6 +42,7 @@ namespace Duplet_x_school.Models
             }
 
         }
+        [Required]
         [Display(Name = "ID code")]
         public string IDCode { get; set; }
         public StudentSchoolClassEnrollment StudentSchoolClassEnrollment { get; set; }

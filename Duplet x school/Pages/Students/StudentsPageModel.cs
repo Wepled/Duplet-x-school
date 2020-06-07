@@ -17,11 +17,15 @@ namespace Duplet_x_school.Pages.Students
         public SelectList SchoolClassNameSL { get; set; }
 
         public void PopulateStudentOptSubjects(SchoolContext context,
-                                               Student student)
+                                               Student student = null)
         {
             var allOptSubjects = context.OptSubjects;
-            var studentOptSubjects = new HashSet<int>(
-                student.StudentOptSubjectEnrollments.Select(c => c.OptSubjectId));
+            var studentOptSubjects = new HashSet<int>();
+            if (student != null)
+            {
+                 studentOptSubjects = new HashSet<int>(
+                    student.StudentOptSubjectEnrollments.Select(c => c.OptSubjectId));
+            }
             AssignedOptSubjectDataList = new List<AssignedOptSubjectData>();
             foreach (var optSubject in allOptSubjects)
             {
@@ -35,7 +39,7 @@ namespace Duplet_x_school.Pages.Students
         }
 
         public void UpdateStudentOptSubjects(SchoolContext context,
-            string[] selectedOptSubjects, Student studentToUpdate)
+            string[] selectedOptSubjects, Student studentToUpdate = null)
         {
 
             if (selectedOptSubjects == null)
@@ -45,8 +49,12 @@ namespace Duplet_x_school.Pages.Students
             }
 
             var selectedOptSubjectsHS = new HashSet<string>(selectedOptSubjects);
-            var studentOptSubjects = new HashSet<int>
-                (studentToUpdate.StudentOptSubjectEnrollments.Select(c => c.OptSubject.Id));
+            var studentOptSubjects = new HashSet<int>();
+            if (studentToUpdate.StudentOptSubjectEnrollments != null)
+            {
+                studentOptSubjects = new HashSet<int>
+                    (studentToUpdate.StudentOptSubjectEnrollments.Select(c => c.OptSubject.Id));
+            }
             foreach (var optSubject in context.OptSubjects)
             {
                 if (selectedOptSubjectsHS.Contains(optSubject.Id.ToString()))

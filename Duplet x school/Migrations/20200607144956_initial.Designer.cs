@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Duplet_x_school.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20200521155001_inittial")]
-    partial class inittial
+    [Migration("20200607144956_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,6 +134,7 @@ namespace Duplet_x_school.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("IDCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")

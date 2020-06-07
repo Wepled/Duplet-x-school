@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Duplet_x_school.Migrations
 {
-    public partial class inittial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,7 +55,7 @@ namespace Duplet_x_school.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    IDCode = table.Column<string>(nullable: true)
+                    IDCode = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
