@@ -40,7 +40,7 @@ namespace Duplet_x_school.Pages.Students
             }
             Student.StudentOptSubjectEnrollments = new List<StudentOptSubjectEnrollment>();
             _context.Students.Add(Student);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             UpdateStudentOptSubjects(_context, selectedOptSubjects,  _context.Students.SingleOrDefault(c => c.IDCode == Student.IDCode));
             await _context.SaveChangesAsync();
 

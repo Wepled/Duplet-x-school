@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Duplet_x_school.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20200607144956_initial")]
+    [Migration("20200610075035_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,16 +23,23 @@ namespace Duplet_x_school.Migrations
 
             modelBuilder.Entity("Duplet_x_school.Models.Grades", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("StudentId", "SubjectId");
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectId");
 
