@@ -84,9 +84,6 @@ namespace Duplet_x_school.Data
 
             modelBuilder.Entity<SchoolClassKabinetAssignment>()
                 .HasKey(c => new { c.SchoolClassId, c.KabinetId });
-
-            modelBuilder.Entity<Grades>()
-                .HasKey(c => new { c.StudentId, c.SubjectId });
         }
 
     }
