@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Duplet_x_school.Models;
 using Duplet_x_school.Data;
+using System.Collections.Generic;
 
 namespace Duplet_x_school.Pages.Teachers
 {
@@ -17,6 +18,7 @@ namespace Duplet_x_school.Pages.Teachers
         public IActionResult OnGet()
         {
             PopulateClassesDropDownList(_context);
+            PopulateTeacherSubjects(_context);
             return Page();
         }
 
@@ -24,7 +26,7 @@ namespace Duplet_x_school.Pages.Teachers
         [BindProperty]
         public Teacher Teacher { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string[] selectedSubjects)
         {
             var emptyTeacher = new Teacher();
 
@@ -33,7 +35,10 @@ namespace Duplet_x_school.Pages.Teachers
                  "teacher",   // Prefix for form value.
                  s => s.Id, s => s.FirstMidName, s => s.LastName, s => s.HireDate, s => s.TeacherKabinetAssignment, s => s.TeacherSubjectAssignments, s => s.TeacherOptSubjectAssignments, s => s.TeacherSchoolClassAssignment))
             {
+                emptyTeacher.TeacherSubjectAssignments = new List<TeacherSubjectAssignment>();
                 _context.Teachers.Add(emptyTeacher);
+                await _context.SaveChangesAsync();
+                UpdateTeacherSubjects(_context, selectedSubjects, emptyTeacher);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
