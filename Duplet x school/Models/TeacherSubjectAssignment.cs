@@ -11,5 +11,6 @@ namespace Duplet_x_school.Models
         public int SubjectId { get; set; }
         public Teacher Teacher { get; set; }
         public Subject Subject { get; set; }
+
     }
 }
