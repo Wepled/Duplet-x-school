@@ -27,7 +27,7 @@ namespace Duplet_x_school.Pages.SchoolClasses
         {
             SchoolClasses = await _context.SchoolClasses
                 .Include(c => c.StudentSchoolClassEnrollments)
-                .Include(c => c.SchoolClassKabinetAssignment).ThenInclude(c => c.Kabinet)
+                .Include(c => c.SchoolClassKabinetAssignment).ThenInclude(c=>c.Kabinet)
                 .Include(c => c.TeacherSchoolClassAssignment).ThenInclude(c => c.Teacher)
                 .AsNoTracking()
                 .ToListAsync(); ;

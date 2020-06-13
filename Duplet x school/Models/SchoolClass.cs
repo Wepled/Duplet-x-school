@@ -12,8 +12,8 @@ namespace Duplet_x_school.Models
         [Display(Name = "Class")]
         public string Name { get; set; }
         public ICollection<StudentSchoolClassEnrollment> StudentSchoolClassEnrollments { get; set; }
-        public SchoolClassKabinetAssignment SchoolClassKabinetAssignment { get; set; }
         public ICollection<SchoolClassSubjectAssignment> SchoolClassSubjectAssignments { get; set; }
+        public SchoolClassKabinetAssignment SchoolClassKabinetAssignment { get; set; }
         public TeacherSchoolClassAssignment TeacherSchoolClassAssignment { get; set; }
 
     }

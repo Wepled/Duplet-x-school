@@ -94,18 +94,16 @@ namespace Duplet_x_school.Migrations
 
             modelBuilder.Entity("Duplet_x_school.Models.SchoolClassKabinetAssignment", b =>
                 {
-                    b.Property<int>("SchoolClassKabinetAssignmentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("SchoolClassId")
+                        .HasColumnType("int");
 
                     b.Property<int>("KabinetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SchoolClassId")
+                    b.Property<int>("SchoolClassKabinetAssignmentId")
                         .HasColumnType("int");
 
-                    b.HasKey("SchoolClassKabinetAssignmentId");
+                    b.HasKey("SchoolClassId", "KabinetId");
 
                     b.HasIndex("KabinetId");
 

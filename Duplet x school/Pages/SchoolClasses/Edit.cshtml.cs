@@ -41,7 +41,6 @@ namespace Duplet_x_school.Pages.SchoolClasses
             {
                 return NotFound();
             }
-
             PopulateKabinetsDropDownList(_context, SchoolClass);
             PopulateClassSubjects(_context, SchoolClass);
             return Page();
@@ -74,14 +73,12 @@ namespace Duplet_x_school.Pages.SchoolClasses
                 {
                     schoolClassToUpdate.SchoolClassSubjectAssignments = null;
                 }
-                
-                
+
                 UpdateClassSubjects(_context, selectedSubjects, schoolClassToUpdate);
                 UpdateKabinets(_context, SchoolClass.SchoolClassKabinetAssignment.KabinetId, schoolClassToUpdate);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
-
             PopulateKabinetsDropDownList(_context, SchoolClass);
             PopulateClassSubjects(_context, schoolClassToUpdate);
             return RedirectToPage("./Index");

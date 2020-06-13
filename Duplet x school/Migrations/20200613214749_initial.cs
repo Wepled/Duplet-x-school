@@ -95,14 +95,13 @@ namespace Duplet_x_school.Migrations
                 name: "SchoolClassKabinetAssignment",
                 columns: table => new
                 {
-                    SchoolClassKabinetAssignmentId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     SchoolClassId = table.Column<int>(nullable: false),
-                    KabinetId = table.Column<int>(nullable: false)
+                    KabinetId = table.Column<int>(nullable: false),
+                    SchoolClassKabinetAssignmentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SchoolClassKabinetAssignment", x => x.SchoolClassKabinetAssignmentId);
+                    table.PrimaryKey("PK_SchoolClassKabinetAssignment", x => new { x.SchoolClassId, x.KabinetId });
                     table.ForeignKey(
                         name: "FK_SchoolClassKabinetAssignment_Kabinet_KabinetId",
                         column: x => x.KabinetId,

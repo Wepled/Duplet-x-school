@@ -88,7 +88,6 @@ namespace Duplet_x_school.Pages.SchoolClasses
             }
         }
 
-
         public void PopulateKabinetsDropDownList(SchoolContext _context,
             object selectedKabinet = null)
         {
@@ -105,6 +104,7 @@ namespace Duplet_x_school.Pages.SchoolClasses
 
             var schoolClassKabinet = schoolClass.SchoolClassKabinetAssignment.KabinetId;
 
+            context.Attach(schoolClass).State = EntityState.Modified;
             context.Remove(schoolClass.SchoolClassKabinetAssignment);
 
             schoolClass.SchoolClassKabinetAssignment =
