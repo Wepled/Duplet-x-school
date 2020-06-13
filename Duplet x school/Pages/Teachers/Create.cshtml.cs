@@ -37,7 +37,7 @@ namespace Duplet_x_school.Pages.Teachers
             {
                 emptyTeacher.TeacherSubjectAssignments = new List<TeacherSubjectAssignment>();
                 _context.Teachers.Add(emptyTeacher);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 UpdateTeacherSubjects(_context, selectedSubjects, emptyTeacher);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");

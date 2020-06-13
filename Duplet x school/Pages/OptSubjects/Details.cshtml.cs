@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Duplet_x_school.Data;
 using Duplet_x_school.Models;
 
-namespace Duplet_x_school.Pages.SchoolClasses
+namespace Duplet_x_school.Pages.OptSubjects
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Duplet_x_school.Pages.SchoolClasses
             _context = context;
         }
 
-        public SchoolClass SchoolClass { get; set; }
+        public OptSubject OptSubject { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,11 +28,9 @@ namespace Duplet_x_school.Pages.SchoolClasses
                 return NotFound();
             }
 
-            SchoolClass = await _context.SchoolClasses
-                .Include(m => m.SchoolClassSubjectAssignments).ThenInclude(m => m.Subject)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            OptSubject = await _context.OptSubjects.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (SchoolClass == null)
+            if (OptSubject == null)
             {
                 return NotFound();
             }

@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Duplet_x_school.Data;
 using Duplet_x_school.Models;
 
-namespace Duplet_x_school.Pages.SchoolClasses
+namespace Duplet_x_school.Pages.OptSubjects
 {
-    public class CreateModel : SchoolClassPAgemodel
+    public class CreateModel : PageModel
     {
         private readonly Duplet_x_school.Data.SchoolContext _context;
 
@@ -21,24 +21,22 @@ namespace Duplet_x_school.Pages.SchoolClasses
 
         public IActionResult OnGet()
         {
-            PopulateClassSubjects(_context);
             return Page();
         }
 
         [BindProperty]
-        public SchoolClass SchoolClass { get; set; }
+        public OptSubject OptSubject { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(string[] selectedSubjects)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            UpdateClassSubjects(_context, selectedSubjects, SchoolClass);
-            _context.SchoolClasses.Add(SchoolClass);
+            _context.OptSubjects.Add(OptSubject);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -110,6 +110,9 @@ namespace Duplet_x_school.Data
             var subjectassignments = new SchoolClassSubjectAssignment[]
             {
                 new SchoolClassSubjectAssignment { SubjectId = 1, SchoolClassId = 1 },
+                new SchoolClassSubjectAssignment { SubjectId = 2, SchoolClassId = 1 },
+                new SchoolClassSubjectAssignment { SubjectId = 3, SchoolClassId = 1 },
+                new SchoolClassSubjectAssignment { SubjectId = 4, SchoolClassId = 1 },
                 new SchoolClassSubjectAssignment { SubjectId = 2, SchoolClassId = 2 }
             };
 

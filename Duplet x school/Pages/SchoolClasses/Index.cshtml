@@ -14,23 +14,73 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SchoolClass[0].Name)
+                @Html.DisplayNameFor(model => model.SchoolClasses[0].Name)
+            </th>
+            <th>
+                Kabinet
+            </th>
+            <th>
+                Number of students
+            </th>
+            <th>
+                Class teacher
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.SchoolClass) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.SchoolClasses)
+        {
+            string selectedRow = "";
+            if (item.Id == Model.SchoolClassID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SchoolClassKabinetAssignment.Kabinet.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentSchoolClassEnrollments.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeacherSchoolClassAssignment.Teacher.FullName)
+                </td>
+                <td>
+                    <a asp-page="./Index" asp-route-id="@item.Id">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@if (Model.SchoolClassID != null)
+{
+    <h3>Students at Class</h3>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Id Code</th>
+        </tr>
+
+        @foreach (var item in Model.SchoolClassStudents.StudentSchoolClassEnrollments)
+        {
+            string selectedRow = "";
+            <tr class="@selectedRow">
+                <td>
+                    @item.Student.FullName
+                </td>
+                <td>
+                    @item.Student.IDCode
+                </td>
+            </tr>
+        }
+
+    </table>
+}

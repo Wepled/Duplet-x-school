@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Duplet_x_school.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20200610075035_initial")]
+    [Migration("20200613195734_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,13 +96,18 @@ namespace Duplet_x_school.Migrations
 
             modelBuilder.Entity("Duplet_x_school.Models.SchoolClassKabinetAssignment", b =>
                 {
-                    b.Property<int>("SchoolClassId")
-                        .HasColumnType("int");
+                    b.Property<int>("SchoolClassKabinetAssignmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("KabinetId")
                         .HasColumnType("int");
 
-                    b.HasKey("SchoolClassId", "KabinetId");
+                    b.Property<int>("SchoolClassId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SchoolClassKabinetAssignmentId");
 
                     b.HasIndex("KabinetId");
 
@@ -286,7 +291,8 @@ namespace Duplet_x_school.Migrations
 
                     b.HasKey("TeacherId", "SchoolClassId");
 
-                    b.HasIndex("SchoolClassId");
+                    b.HasIndex("SchoolClassId")
+                        .IsUnique();
 
                     b.HasIndex("TeacherId")
                         .IsUnique();
@@ -342,7 +348,7 @@ namespace Duplet_x_school.Migrations
             modelBuilder.Entity("Duplet_x_school.Models.SchoolClassSubjectAssignment", b =>
                 {
                     b.HasOne("Duplet_x_school.Models.SchoolClass", "SchoolClass")
-                        .WithMany()
+                        .WithMany("SchoolClassSubjectAssignments")
                         .HasForeignKey("SchoolClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -417,8 +423,8 @@ namespace Duplet_x_school.Migrations
             modelBuilder.Entity("Duplet_x_school.Models.TeacherSchoolClassAssignment", b =>
                 {
                     b.HasOne("Duplet_x_school.Models.SchoolClass", "SchoolClass")
-                        .WithMany()
-                        .HasForeignKey("SchoolClassId")
+                        .WithOne("TeacherSchoolClassAssignment")
+                        .HasForeignKey("Duplet_x_school.Models.TeacherSchoolClassAssignment", "SchoolClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

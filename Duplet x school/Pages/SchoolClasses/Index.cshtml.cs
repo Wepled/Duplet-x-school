@@ -19,11 +19,28 @@ namespace Duplet_x_school.Pages.SchoolClasses
             _context = context;
         }
 
-        public IList<SchoolClass> SchoolClass { get;set; }
+        public IList<SchoolClass> SchoolClasses { get;set; }
+        public SchoolClass SchoolClassStudents { get;set; }
+        public int? SchoolClassID { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? Id)
         {
-            SchoolClass = await _context.SchoolClasses.ToListAsync();
+            SchoolClasses = await _context.SchoolClasses
+                .Include(c => c.StudentSchoolClassEnrollments)
+                .Include(c => c.SchoolClassKabinetAssignment).ThenInclude(c => c.Kabinet)
+                .Include(c => c.TeacherSchoolClassAssignment).ThenInclude(c => c.Teacher)
+                .AsNoTracking()
+                .ToListAsync(); ;
+
+            if (Id != null)
+            {
+                SchoolClassID = Id.Value;
+
+                SchoolClassStudents = await _context.SchoolClasses
+                    .Include(c => c.StudentSchoolClassEnrollments).ThenInclude(c => c.Student)
+                    .FirstOrDefaultAsync(c => c.Id == SchoolClassID);
+            }
+            
         }
     }
 }

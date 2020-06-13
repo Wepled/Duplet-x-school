@@ -11,7 +11,7 @@ using Duplet_x_school.Models;
 
 namespace Duplet_x_school.Pages.SchoolClasses
 {
-    public class EditModel : PageModel
+    public class EditModel : SchoolClassPAgemodel
     {
         private readonly Duplet_x_school.Data.SchoolContext _context;
 
@@ -30,42 +30,60 @@ namespace Duplet_x_school.Pages.SchoolClasses
                 return NotFound();
             }
 
-            SchoolClass = await _context.SchoolClasses.FirstOrDefaultAsync(m => m.Id == id);
+            SchoolClass = await _context.SchoolClasses
+                .Include(m=>m.SchoolClassSubjectAssignments).ThenInclude(m=>m.Subject)
+                .Include(m=>m.SchoolClassKabinetAssignment).ThenInclude(m=>m.Kabinet)
+                .Include(c => c.TeacherSchoolClassAssignment)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (SchoolClass == null)
             {
                 return NotFound();
             }
+
+            PopulateKabinetsDropDownList(_context, SchoolClass);
+            PopulateClassSubjects(_context, SchoolClass);
             return Page();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id, string[] selectedSubjects)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(SchoolClass).State = EntityState.Modified;
+            var schoolClassToUpdate = await _context.SchoolClasses
+                .Include(c => c.SchoolClassSubjectAssignments).ThenInclude(c => c.Subject)
+                .Include(c => c.SchoolClassKabinetAssignment).ThenInclude(c => c.Kabinet)
+                .Include(c => c.TeacherSchoolClassAssignment).ThenInclude(c=> c.Teacher)
+                .FirstOrDefaultAsync(m => m.Id == SchoolClass.Id);
 
-            try
+            if (await TryUpdateModelAsync<SchoolClass>(
+                schoolClassToUpdate,
+                "SchoolClass",
+                i => i.Name, i => i.SchoolClassSubjectAssignments,
+                i => i.StudentSchoolClassEnrollments,
+                i => i.TeacherSchoolClassAssignment))
             {
+                if (String.IsNullOrWhiteSpace(
+                    schoolClassToUpdate.SchoolClassSubjectAssignments.ToString()))
+                {
+                    schoolClassToUpdate.SchoolClassSubjectAssignments = null;
+                }
+                
+                
+                UpdateClassSubjects(_context, selectedSubjects, schoolClassToUpdate);
+                UpdateKabinets(_context, SchoolClass.SchoolClassKabinetAssignment.KabinetId, schoolClassToUpdate);
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SchoolClassExists(SchoolClass.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
+            PopulateKabinetsDropDownList(_context, SchoolClass);
+            PopulateClassSubjects(_context, schoolClassToUpdate);
             return RedirectToPage("./Index");
         }
 

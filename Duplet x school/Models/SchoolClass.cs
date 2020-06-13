@@ -13,6 +13,8 @@ namespace Duplet_x_school.Models
         public string Name { get; set; }
         public ICollection<StudentSchoolClassEnrollment> StudentSchoolClassEnrollments { get; set; }
         public SchoolClassKabinetAssignment SchoolClassKabinetAssignment { get; set; }
+        public ICollection<SchoolClassSubjectAssignment> SchoolClassSubjectAssignments { get; set; }
+        public TeacherSchoolClassAssignment TeacherSchoolClassAssignment { get; set; }
 
     }
 }
