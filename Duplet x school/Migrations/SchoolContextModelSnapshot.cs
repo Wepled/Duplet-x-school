@@ -100,12 +100,10 @@ namespace Duplet_x_school.Migrations
                     b.Property<int>("KabinetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SchoolClassKabinetAssignmentId")
-                        .HasColumnType("int");
-
                     b.HasKey("SchoolClassId", "KabinetId");
 
-                    b.HasIndex("KabinetId");
+                    b.HasIndex("KabinetId")
+                        .IsUnique();
 
                     b.HasIndex("SchoolClassId")
                         .IsUnique();
@@ -254,7 +252,8 @@ namespace Duplet_x_school.Migrations
 
                     b.HasKey("TeacherId", "KabinetId");
 
-                    b.HasIndex("KabinetId");
+                    b.HasIndex("KabinetId")
+                        .IsUnique();
 
                     b.HasIndex("TeacherId")
                         .IsUnique();
@@ -329,8 +328,8 @@ namespace Duplet_x_school.Migrations
             modelBuilder.Entity("Duplet_x_school.Models.SchoolClassKabinetAssignment", b =>
                 {
                     b.HasOne("Duplet_x_school.Models.Kabinet", "Kabinet")
-                        .WithMany()
-                        .HasForeignKey("KabinetId")
+                        .WithOne("SchoolClassKabinetAssignment")
+                        .HasForeignKey("Duplet_x_school.Models.SchoolClassKabinetAssignment", "KabinetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -389,8 +388,8 @@ namespace Duplet_x_school.Migrations
             modelBuilder.Entity("Duplet_x_school.Models.TeacherKabinetAssignment", b =>
                 {
                     b.HasOne("Duplet_x_school.Models.Kabinet", "Kabinet")
-                        .WithMany()
-                        .HasForeignKey("KabinetId")
+                        .WithOne("TeacherKabinetAssignment")
+                        .HasForeignKey("Duplet_x_school.Models.TeacherKabinetAssignment", "KabinetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

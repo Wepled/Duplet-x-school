@@ -96,8 +96,7 @@ namespace Duplet_x_school.Migrations
                 columns: table => new
                 {
                     SchoolClassId = table.Column<int>(nullable: false),
-                    KabinetId = table.Column<int>(nullable: false),
-                    SchoolClassKabinetAssignmentId = table.Column<int>(nullable: false)
+                    KabinetId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -328,7 +327,8 @@ namespace Duplet_x_school.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_SchoolClassKabinetAssignment_KabinetId",
                 table: "SchoolClassKabinetAssignment",
-                column: "KabinetId");
+                column: "KabinetId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SchoolClassKabinetAssignment_SchoolClassId",
@@ -370,7 +370,8 @@ namespace Duplet_x_school.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TeacherKabinetAssignment_KabinetId",
                 table: "TeacherKabinetAssignment",
-                column: "KabinetId");
+                column: "KabinetId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeacherKabinetAssignment_TeacherId",

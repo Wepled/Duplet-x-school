@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Duplet_x_school.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20200613214749_initial")]
+    [Migration("20200613220354_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,12 +102,10 @@ namespace Duplet_x_school.Migrations
                     b.Property<int>("KabinetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SchoolClassKabinetAssignmentId")
-                        .HasColumnType("int");
-
                     b.HasKey("SchoolClassId", "KabinetId");
 
-                    b.HasIndex("KabinetId");
+                    b.HasIndex("KabinetId")
+                        .IsUnique();
 
                     b.HasIndex("SchoolClassId")
                         .IsUnique();
@@ -256,7 +254,8 @@ namespace Duplet_x_school.Migrations
 
                     b.HasKey("TeacherId", "KabinetId");
 
-                    b.HasIndex("KabinetId");
+                    b.HasIndex("KabinetId")
+                        .IsUnique();
 
                     b.HasIndex("TeacherId")
                         .IsUnique();
@@ -331,8 +330,8 @@ namespace Duplet_x_school.Migrations
             modelBuilder.Entity("Duplet_x_school.Models.SchoolClassKabinetAssignment", b =>
                 {
                     b.HasOne("Duplet_x_school.Models.Kabinet", "Kabinet")
-                        .WithMany()
-                        .HasForeignKey("KabinetId")
+                        .WithOne("SchoolClassKabinetAssignment")
+                        .HasForeignKey("Duplet_x_school.Models.SchoolClassKabinetAssignment", "KabinetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -391,8 +390,8 @@ namespace Duplet_x_school.Migrations
             modelBuilder.Entity("Duplet_x_school.Models.TeacherKabinetAssignment", b =>
                 {
                     b.HasOne("Duplet_x_school.Models.Kabinet", "Kabinet")
-                        .WithMany()
-                        .HasForeignKey("KabinetId")
+                        .WithOne("TeacherKabinetAssignment")
+                        .HasForeignKey("Duplet_x_school.Models.TeacherKabinetAssignment", "KabinetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
